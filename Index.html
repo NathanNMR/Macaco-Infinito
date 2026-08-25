@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PortugueseType - Desafio de Digitação</title>
+    <style>
+        :root[data-theme="dark"] {
+            --bg-color: #121214;
+            --card-bg: #202024;
+            --text-color: #e1e1e6;
+            --sub-color: #7c7c8a;
+            --primary-color: #00b37e;
+            --error-color: #f75a68;
+        }
+
+        :root[data-theme="neon"] {
+            --bg-color: #05050a;
+            --card-bg: #12121f;
+            --text-color: #00ffcc;
+            --sub-color: #ff007f;
+            --primary-color: #ffe600;
+            --error-color: #ff3333;
+        }
+
+        :root[data-theme="retro"] {
+            --bg-color: #f4f1ea;
+            --card-bg: #e6e2d3;
+            --text-color: #2b2b2b;
+            --sub-color: #8c857b;
+            --primary-color: #b33939;
+            --error-color: #d63031;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.2rem;
+        }
+
+        p.subtitle {
+            color: var(--sub-color);
+            font-size: 0.9rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .config-bar {
+            display: flex;
+            justify-content: space-between;
+            background-color: var(--card-bg);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .config-group {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .config-btn {
+            background: none;
+            border: none;
+            color: var(--sub-color);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        .config-btn.active, .config-btn:hover {
+            color: var(--primary-color);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            background-color: var(--card-bg);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--sub-color);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .stat-value {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+
+        .typing-box {
+            position: relative;
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            min-height: 180px;
+            display: flex;
+            align-items: center;
+            cursor: text;
+        }
+
+        /* Input visível mas posicionado fora da tela para garantir foco absoluto sem atrapalhar o layout */
+        #input-field {
+            position: absolute;
+            left: -9999px;
+            opacity: 0;
+        }
+
+        .words-display {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 0.6rem;
+            font-size: 1.5rem;
+            line-height: 2rem;
+            user-select: none;
+            max-height: 120px;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .word {
+            display: flex;
+            border-bottom: 2px solid transparent;
+        }
+
+        .letter {
+            color: var(--sub-color);
+            position: relative;
+        }
+
+        .letter.correct {
+            color: var(--text-color);
+        }
+
+        .letter.incorrect {
+            color: var(--error-color);
+            background-color: rgba(247, 90, 104, 0.2);
+        }
+
+        .letter.current::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10%;
+            height: 80%;
+            width: 2px;
+            background-color: var(--primary-color);
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        button.main-btn {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        button.main-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+        }
+
+        .results {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            background-color: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .results h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .results-grid {
+            display: flex;
+            gap: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .result-card span {
+            display: block;
+            color: var(--sub-color);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .result-card strong {
+            font-size: 2.5rem;
+            color: var(--text-color);
+        }
+
+        footer {
+            color: var(--sub-color);
+            font-size: 0.8rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body onclick="focarInput()">
+
+    <header>
+        <h1>PortugueseType</h1>
+        <p class="subtitle">Teste sua velocidade de digitação em português</p>
+    </header>
+
+    <div class="container">
+        <div class="config-bar" id="config-bar" onclick="event.stopPropagation()">
+            <div class="config-group">
+                <span style="color: var(--sub-color);">Tempo:</span>
+                <button class="config-btn time-btn" onclick="mudarTempo(15, event)">15</button>
+                <button class="config-btn time-btn active" onclick="mudarTempo(30, event)">30</button>
+                <button class="config-btn time-btn" onclick="mudarTempo(60, event)">60</button>
+            </div>
+            <div class="config-group">
+                <span style="color: var(--sub-color);">Tema:</span>
+                <button class="config-btn theme-btn active" onclick="mudarTema('dark', event)">Dark</button>
+                <button class="config-btn theme-btn" onclick="mudarTema('neon', event)">Neon</button>
+                <button class="config-btn theme-btn" onclick="mudarTema('retro', event)">Retro</button>
+            </div>
+        </div>
+
+        <div class="stats-bar" id="stats-bar">
+            <div class="stat-item">Tempo<span class="stat-value" id="timer">30</span></div>
+            <div class="stat-item">WPM<span class="stat-value" id="wpm">0</span></div>
+            <div class="stat-item">Precisão<span class="stat-value" id="accuracy">100%</span></div>
+        </div>
+
+        <div class="typing-box" id="typing-box">
+            <input type="text" id="input-field" autocomplete="off" autocapitalize="off" spellcheck="false">
+            <div class="words-display" id="words-display"></div>
+        </div>
+
+        <div class="results" id="results">
+            <h2>Estatísticas Finais</h2>
+            <div class="results-grid">
+                <div class="result-card">
+                    <span>WPM</span>
+                    <strong id="final-wpm">0</strong>
+                </div>
+                <div class="result-card">
+                    <span>Precisão</span>
+                    <strong id="final-accuracy">0%</strong>
+                </div>
+                <div class="result-card">
+                    <span>Recorde (PB)</span>
+                    <strong id="final-pb">0</strong>
+                </div>
+            </div>
+            <button class="main-btn" onclick="reiniciarJogo()">Tentar Novamente</button>
+        </div>
+
+        <div class="controls" id="controls">
+            <button class="main-btn" onclick="reiniciarJogo()">Reiniciar (Tab)</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>Desenvolvido com HTML, CSS e JavaScript puro • Pressione [Tab] para reiniciar</p>
+    </footer>
+
+    <script>
+        const palavrasPt = [
+            "casa", "carro", "tempo", "porta", "livro", "noite", "falar", "comer", "beber",
+            "janela", "computador", "programação", "desenvolvimento", "português", "escola", "trabalho",
+            "amigo", "família", "cidade", "viagem", "história", "palavra", "teclado", "velocidade",
+            "precisão", "desafio", "foco", "estudo", "ciência", "natureza", "planeta", "universo",
+            "música", "arte", "pintura", "sorriso", "alegria", "coragem", "liberdade", "verdade",
+            "pássaro", "oceano", "montanha", "floresta", "estrela", "silêncio", "energia", "coração"
+        ];
+
+        let tempoTotal = 30;
+        let tempoRestante = tempoTotal;
+        let temporizador = null;
+        let jogoIniciado = false;
+        let corretasTotal = 0;
+        let incorretasTotal = 0;
+        let personalBest = localStorage.getItem('portugues_type_pb') || 0;
+
+        const wordsDisplay = document.getElementById('words-display');
+        const inputField = document.getElementById('input-field');
+        const timerDisplay = document.getElementById('timer');
+        const wpmDisplay = document.getElementById('wpm');
+        const accuracyDisplay = document.getElementById('accuracy');
+        const typingBox = document.getElementById('typing-box');
+        const resultsScreen = document.getElementById('results');
+        const statsBar = document.getElementById('stats-bar');
+        const controls = document.getElementById('controls');
+        const configBar = document.getElementById('config-bar');
+        const finalWpm = document.getElementById('final-wpm');
+        const finalAccuracy = document.getElementById('final-accuracy');
+        const finalPb = document.getElementById('final-pb');
+
+        let audioCtx = null;
+        function tocarSomTecla(correto = true) {
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = correto ? 'sine' : 'sawtooth';
+                osc.frequency.setValueAtTime(correto ? 600 : 200, audioCtx.currentTime);
+                
+                gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.05);
+            } catch (e) {}
+        }
+
+        function focarInput() {
+            inputField.focus();
+        }
+
+        function mudarTempo(segundos, event) {
+            tempoTotal = segundos;
+            tempoRestante = segundos;
+            timerDisplay.innerText = tempoRestante;
+            
+            document.querySelectorAll('.time-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            reiniciarJogo();
+        }
+
+        function mudarTema(tema, event) {
+            document.documentElement.setAttribute('data-theme', tema);
+            document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function embaralharEGerarPalavras() {
+            wordsDisplay.innerHTML = '';
+            const selecionadas = [];
+            for (let i = 0; i < 40; i++) {
+                const rand = Math.floor(Math.random() * palavrasPt.length);
+                selecionadas.push(palavrasPt[rand]);
+            }
+
+            selecionadas.forEach((palavra, index) => {
+                const palavraDiv = document.createElement('div');
+                palavraDiv.classList.add('word');
+                if (index === 0) palavraDiv.classList.add('current');
+
+                for (let letra of palavra) {
+                    const letraSpan = document.createElement('span');
+                    letraSpan.classList.add('letter');
+                    letraSpan.innerText = letra;
+                    palavraDiv.appendChild(letraSpan);
+                }
+                wordsDisplay.appendChild(palavraDiv);
+            });
+
+            const primeiraPalavra = wordsDisplay.querySelector('.word');
+            if (primeiraPalavra) {
+                primeiraPalavra.querySelector('.letter').classList.add('current');
+            }
+        }
+
+        function iniciarJogo() {
+            if (!jogoIniciado) {
+                jogoIniciado = true;
+                configBar.style.opacity = '0.5';
+                configBar.style.pointerEvents = 'none';
+
+                temporizador = setInterval(() => {
+                    tempoRestante--;
+                    timerDisplay.innerText = tempoRestante;
+                    calculaWPM();
+
+                    if (tempoRestante <= 0) {
+                        finalizarJogo();
+                    }
+                }, 1000);
+            }
+        }
+
+        inputField.addEventListener('input', (e) => {
+            if (!jogoIniciado) iniciarJogo();
+
+            const valorDigitado = inputField.value;
+            const palavraAtual = wordsDisplay.querySelector('.word.current');
+            if (!palavraAtual) return;
+
+            const letrasPalavra = palavraAtual.querySelectorAll('.letter');
+
+            if (valorDigitado.endsWith(' ')) {
+                inputField.value = '';
+                tocarSomTecla(true);
+                
+                letrasPalavra.forEach(l => {
+                    if (!l.classList.contains('correct') && !l.classList.contains('incorrect')) {
+                        l.classList.add('incorrect');
+                        incorretasTotal++;
+                    }
+                });
+
+                palavraAtual.classList.remove('current', 'current-word-end');
+                letrasPalavra.forEach(l => l.classList.remove('current'));
+
+                const proximaPalavra = palavraAtual.nextElementSibling;
+                if (proximaPalavra) {
+                    proximaPalavra.classList.add('current');
+                    proximaPalavra.querySelector('.letter').classList.add('current');
+                } else {
+                    embaralharEGerarPalavras();
+                }
+                return;
+            }
+
+            totalLetrasDigitadas++;
+            const letrasDigitadasArray = valorDigitado.split('');
+            let erroNaPalavra = false;
+
+            letrasPalavra.forEach((letraSpan, index) => {
+                letraSpan.classList.remove('correct', 'incorrect', 'current');
+
+                if (index < letrasDigitadasArray.length) {
+                    if (letrasDigitadasArray[index] === letraSpan.innerText) {
+                        letraSpan.classList.add('correct');
+                        corretasTotal++;
+                    } else {
+                        letraSpan.classList.add('incorrect');
+                        incorretasTotal++;
+                        erroNaPalavra = true;
+                    }
+                }
+            });
+
+            tocarSomTecla(!erroNaPalavra);
+
+            const proximoIndex = letrasDigitadasArray.length;
+            if (proximoIndex < letrasPalavra.length) {
+                letrasPalavra[proximoIndex].classList.add('current');
+                palavraAtual.classList.remove('current-word-end');
+            } else {
+                palavraAtual.classList.add('current-word-end');
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                e.preventDefault();
+                reiniciarJogo();
+            }
+        });
+
+        function calculaWPM() {
+            const minutosPassados = (tempoTotal - tempoRestante) / 60;
+            if (minutosPassados > 0) {
+                const wpm = Math.round((corretasTotal / 5) / minutosPassados);
+                wpmDisplay.innerText = wpm >= 0 ? wpm : 0;
+            }
+
+            const totalTentativas = corretasTotal + incorretasTotal;
+            if (totalTentativas > 0) {
+                const precisao = Math.round((corretasTotal / totalTentativas) * 100);
+                accuracyDisplay.innerText = precisao + '%';
+            }
+        }
+
+        function finalizarJogo() {
+            clearInterval(temporizador);
+            inputField.value = '';
+            inputField.blur();
+
+            calculaWPM();
+            const wpmFinalNum = parseInt(wpmDisplay.innerText);
+
+            if (wpmFinalNum > personalBest) {
+                personalBest = wpmFinalNum;
+                localStorage.setItem('portugues_type_pb', personalBest);
+            }
+
+            finalWpm.innerText = wpmFinalNum;
+            finalAccuracy.innerText = accuracyDisplay.innerText;
+            finalPb.innerText = personalBest;
+
+            statsBar.style.display = 'none';
+            typingBox.style.display = 'none';
+            controls.style.display     = 'none';
+            configBar.style.display = 'none';
+            resultsScreen.style.display = 'flex';
+        }
+
+        function reiniciarJogo() {
+            clearInterval(temporizador);
+            jogoIniciado = false;
+            tempoRestante = tempoTotal;
+            corretasTotal = 0;
+            incorretasTotal = 0;
+
+            timerDisplay.innerText = tempoRestante;
+            wpmDisplay.innerText = '0';
+            accuracyDisplay.innerText.innerText = '100%';
+
+            statsBar.style.display = 'flex';
+            typingBox.style.display = 'flex';
+            controls.style.display = 'flex';
+            configBar.style.display = 'flex';
+            configBar.style.opacity = '1';
+            configBar.style.pointerEvents = 'auto';
+            resultsScreen.style.display = 'none';
+
+            embaralharEGerarPalavras();
+            focarInput();
+        }
+
+        window.onload = () => {
+            embaralharEGerarPalavras();
+            focarInput();
+        };
+    </script>
+</body>
+</html>
