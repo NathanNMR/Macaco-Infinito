@@ -134,26 +134,12 @@
         }
 
         .typing-box {
-            position: relative;
             background-color: var(--card-bg);
             padding: 2rem;
             border-radius: 8px;
-            min-height: 180px;
             display: flex;
-            align-items: center;
-            cursor: text;
-        }
-
-        /* Input transparente cobrindo a caixa, permitindo foco e digitação nativa perfeita */
-        #input-field {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: text;
-            z-index: 2;
+            flex-direction: column;
+            gap: 1.5rem;
         }
 
         .words-display {
@@ -166,7 +152,6 @@
             max-height: 120px;
             overflow: hidden;
             width: 100%;
-            z-index: 1;
         }
 
         .word {
@@ -202,6 +187,24 @@
         @keyframes blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
+        }
+
+        /* Campo de digitação visível e funcional */
+        #input-field {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            border: 2px solid var(--sub-color);
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 1.1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        #input-field:focus {
+            border-color: var(--primary-color);
         }
 
         .controls {
@@ -269,7 +272,7 @@
         }
     </style>
 </head>
-<body onclick="focarInput()">
+<body>
 
     <header>
         <h1>PortugueseType</h1>
@@ -277,7 +280,7 @@
     </header>
 
     <div class="container">
-        <div class="config-bar" id="config-bar" onclick="event.stopPropagation()">
+        <div class="config-bar" id="config-bar">
             <div class="config-group">
                 <span style="color: var(--sub-color);">Tempo:</span>
                 <button class="config-btn time-btn" onclick="mudarTempo(15, event)">15</button>
@@ -299,8 +302,8 @@
         </div>
 
         <div class="typing-box" id="typing-box">
-            <input type="text" id="input-field" autocomplete="off" autocapitalize="off" spellcheck="false">
             <div class="words-display" id="words-display"></div>
+            <input type="text" id="input-field" placeholder="Digite a palavra aqui e aperte espaço..." autocomplete="off" autocapitalize="off" spellcheck="false">
         </div>
 
         <div class="results" id="results">
@@ -382,10 +385,6 @@
                 osc.start();
                 osc.stop(audioCtx.currentTime + 0.05);
             } catch (e) {}
-        }
-
-        function focarInput() {
-            inputField.focus();
         }
 
         function mudarTempo(segundos, event) {
@@ -537,7 +536,7 @@
         function finalizarJogo() {
             clearInterval(temporizador);
             inputField.value = '';
-            inputField.blur();
+            inputField.disabled = true;
 
             calculaWPM();
             const wpmFinalNum = parseInt(wpmDisplay.innerText);
@@ -577,13 +576,15 @@
             configBar.style.pointerEvents = 'auto';
             resultsScreen.style.display = 'none';
 
+            inputField.disabled = false;
+            inputField.value = '';
             embaralharEGerarPalavras();
-            focarInput();
+            inputField.focus();
         }
 
         window.onload = () => {
             embaralharEGerarPalavras();
-            focarInput();
+            inputField.focus();
         };
     </script>
 </body>
