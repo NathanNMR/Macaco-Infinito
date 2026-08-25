@@ -1,29 +1,55 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Teste sua velocidade e precisão de digitação em português.">
 
-    <title>PortugueseType — Desafio de Digitação</title>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Teste sua velocidade e precisão de digitação em português."
+    >
+
+    <title>
+        PortugueseType — Desafio de Digitação
+    </title>
+
 
     <style>
+
+        /* =====================================================
+           VARIÁVEIS
+        ===================================================== */
+
         :root {
+
             --bg: #0d0f12;
+
             --surface: #171a1f;
+
             --surface-2: #1e2229;
+
             --border: #2a3038;
 
             --text: #f2f4f7;
+
             --muted: #8d96a3;
 
             --primary: #00d084;
+
             --primary-dark: #00a96a;
 
             --error: #ff5d6c;
+
             --warning: #ffca3a;
 
-            --shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+            --shadow:
+                0 20px 60px rgba(0, 0, 0, 0.28);
 
             --radius: 16px;
 
@@ -32,75 +58,107 @@
                 "Cascadia Code",
                 "Courier New",
                 monospace;
+
         }
 
-        /* ==============================
+
+        /* =====================================================
            RESET
-        ============================== */
+        ===================================================== */
 
         * {
+
             box-sizing: border-box;
+
             margin: 0;
+
             padding: 0;
+
         }
+
 
         html {
+
             min-height: 100%;
+
             background: var(--bg);
+
         }
 
+
         body {
+
             min-height: 100vh;
 
             padding: 32px 20px;
 
             display: flex;
+
             flex-direction: column;
+
             align-items: center;
 
             gap: 28px;
 
             background:
+
                 radial-gradient(
                     circle at top,
                     rgba(0, 208, 132, 0.08),
                     transparent 35%
                 ),
+
                 var(--bg);
 
             color: var(--text);
 
             font-family: var(--font);
+
         }
+
 
         button,
         select,
         input {
+
             font: inherit;
+
         }
+
 
         button,
         select {
+
             cursor: pointer;
+
         }
+
 
         button:focus-visible,
         select:focus-visible {
+
             outline: 2px solid var(--primary);
+
             outline-offset: 3px;
+
         }
 
-        /* ==============================
-           HEADER
-        ============================== */
+
+        /* =====================================================
+           CABEÇALHO
+        ===================================================== */
 
         header {
+
             width: min(100%, 960px);
 
             text-align: center;
+
         }
 
+
         .brand {
+
             display: inline-flex;
 
             align-items: center;
@@ -108,69 +166,98 @@
             gap: 10px;
 
             margin-bottom: 8px;
+
         }
 
+
         .brand-icon {
-            width: 38px;
-            height: 38px;
+
+            width: 40px;
+
+            height: 40px;
 
             display: grid;
+
             place-items: center;
 
-            border: 1px solid rgba(0, 208, 132, 0.3);
+            border:
+                1px solid
+                rgba(0, 208, 132, 0.3);
 
             border-radius: 10px;
 
-            background: rgba(0, 208, 132, 0.08);
+            background:
+                rgba(0, 208, 132, 0.08);
 
             color: var(--primary);
 
-            font-size: 18px;
+            font-size: 19px;
+
         }
+
 
         h1 {
+
             color: var(--primary);
 
-            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            font-size:
+                clamp(1.5rem, 4vw, 2.2rem);
 
             letter-spacing: -0.05em;
+
         }
 
+
         .subtitle {
+
             color: var(--muted);
 
             font-size: 0.85rem;
 
             line-height: 1.6;
+
         }
 
-        /* ==============================
+
+        /* =====================================================
            MAIN
-        ============================== */
+        ===================================================== */
 
         main {
+
             width: min(100%, 960px);
 
             display: grid;
 
             gap: 16px;
+
         }
+
 
         .panel {
-            border: 1px solid var(--border);
 
-            border-radius: var(--radius);
+            border:
+                1px solid
+                var(--border);
 
-            background: rgba(23, 26, 31, 0.92);
+            border-radius:
+                var(--radius);
 
-            box-shadow: var(--shadow);
+            background:
+                rgba(23, 26, 31, 0.92);
+
+            box-shadow:
+                var(--shadow);
+
         }
 
-        /* ==============================
-           TOOLBAR
-        ============================== */
+
+        /* =====================================================
+           CONFIGURAÇÕES
+        ===================================================== */
 
         .toolbar {
+
             padding: 14px 16px;
 
             display: flex;
@@ -180,17 +267,23 @@
             align-items: center;
 
             gap: 16px;
+
         }
 
+
         .toolbar-group {
+
             display: flex;
 
             align-items: center;
 
             gap: 10px;
+
         }
 
+
         .toolbar-label {
+
             color: var(--muted);
 
             font-size: 0.72rem;
@@ -198,47 +291,68 @@
             text-transform: uppercase;
 
             letter-spacing: 0.08em;
+
         }
 
+
         select {
-            min-width: 100px;
+
+            min-width: 110px;
 
             padding: 8px 10px;
 
-            border: 1px solid var(--border);
+            border:
+                1px solid
+                var(--border);
 
             border-radius: 9px;
 
-            background: var(--surface-2);
+            background:
+                var(--surface-2);
 
             color: var(--text);
+
         }
 
-        /* ==============================
+
+        /* =====================================================
            ESTATÍSTICAS
-        ============================== */
+        ===================================================== */
 
         .stats {
+
             display: grid;
 
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns:
+                repeat(3, 1fr);
 
             overflow: hidden;
+
         }
 
+
         .stat {
+
             padding: 18px;
 
             text-align: center;
 
-            border-right: 1px solid var(--border);
+            border-right:
+                1px solid
+                var(--border);
+
         }
+
 
         .stat:last-child {
+
             border-right: 0;
+
         }
 
+
         .stat-label {
+
             display: block;
 
             margin-bottom: 6px;
@@ -250,48 +364,65 @@
             text-transform: uppercase;
 
             letter-spacing: 0.08em;
+
         }
+
 
         .stat-value {
+
             color: var(--primary);
 
-            font-size: clamp(1.3rem, 4vw, 1.8rem);
+            font-size:
+                clamp(1.3rem, 4vw, 1.8rem);
 
             font-weight: 700;
+
         }
 
-        /* ==============================
+
+        /* =====================================================
            BARRA DE PROGRESSO
-        ============================== */
+        ===================================================== */
 
         .progress {
-            height: 3px;
 
-            background: var(--surface-2);
+            height: 4px;
+
+            background:
+                var(--surface-2);
 
             overflow: hidden;
+
         }
 
+
         .progress-bar {
+
             width: 100%;
 
             height: 100%;
 
-            background: var(--primary);
+            background:
+                var(--primary);
 
             transform-origin: left;
 
-            transition: transform 0.25s linear;
+            transition:
+                transform 0.25s linear;
+
         }
 
-        /* ==============================
+
+        /* =====================================================
            ÁREA DE DIGITAÇÃO
-        ============================== */
+        ===================================================== */
 
         .typing-panel {
-            min-height: 280px;
 
-            padding: clamp(20px, 5vw, 40px);
+            min-height: 290px;
+
+            padding:
+                clamp(20px, 5vw, 40px);
 
             display: flex;
 
@@ -300,20 +431,30 @@
             position: relative;
 
             overflow: hidden;
+
         }
+
 
         .typing-panel.running {
-            border-color: rgba(0, 208, 132, 0.35);
+
+            border-color:
+                rgba(0, 208, 132, 0.35);
+
         }
+
 
         .typing-panel.finished {
+
             display: none;
+
         }
 
+
         .words {
+
             width: 100%;
 
-            max-height: 170px;
+            max-height: 175px;
 
             overflow: hidden;
 
@@ -325,75 +466,101 @@
 
             gap: 9px 12px;
 
-            font-size: clamp(1.15rem, 3vw, 1.55rem);
+            font-size:
+                clamp(1.15rem, 3vw, 1.55rem);
 
             line-height: 1.8;
 
             user-select: none;
+
         }
 
+
         .word {
+
             position: relative;
 
             display: inline-flex;
 
             color: var(--muted);
+
         }
+
 
         .word.current {
+
             color: var(--text);
+
         }
+
 
         .letter {
+
             position: relative;
+
         }
+
 
         .letter.correct {
+
             color: var(--text);
+
         }
+
 
         .letter.incorrect {
+
             color: var(--error);
 
-            background: rgba(255, 93, 108, 0.14);
+            background:
+                rgba(255, 93, 108, 0.14);
 
             border-radius: 2px;
+
         }
 
-        /* ==============================
-           CURSOR
-        ============================== */
 
         .letter.current::after {
+
             content: "";
 
             position: absolute;
 
             top: 10%;
+
             bottom: 10%;
 
             left: -1px;
 
             width: 2px;
 
-            background: var(--primary);
+            background:
+                var(--primary);
 
-            animation: blink 1s infinite;
+            animation:
+                blink 1s infinite;
+
         }
 
-        /* Caracteres extras */
+
         .extra {
+
             color: var(--error);
 
-            background: rgba(255, 93, 108, 0.14);
+            background:
+                rgba(255, 93, 108, 0.14);
 
             border-radius: 2px;
+
         }
 
+
         .typing-hint {
+
             position: absolute;
 
             right: 20px;
+
             bottom: 14px;
 
             color: var(--muted);
@@ -401,131 +568,16 @@
             font-size: 0.68rem;
 
             opacity: 0.75;
+
         }
 
-        /* ==============================
-           BOTÕES
-        ============================== */
 
-        .controls {
-            display: flex;
-
-            justify-content: center;
-
-            gap: 10px;
-        }
-
-        .btn {
-            padding: 10px 16px;
-
-            border: 1px solid var(--border);
-
-            border-radius: 10px;
-
-            background: var(--surface);
-
-            color: var(--text);
-
-            transition: 0.2s ease;
-        }
-
-        .btn:hover {
-            border-color: var(--primary);
-
-            color: var(--primary);
-
-            transform: translateY(-1px);
-        }
-
-        .btn.primary {
-            border-color: var(--primary);
-
-            background: var(--primary);
-
-            color: #07120d;
-
-            font-weight: 700;
-        }
-
-        .btn.primary:hover {
-            background: var(--primary-dark);
-
-            color: white;
-        }
-
-        /* ==============================
-           RESULTADOS
-        ============================== */
-
-        .results {
-            display: none;
-
-            padding: clamp(28px, 6vw, 50px);
-
-            text-align: center;
-        }
-
-        .results.show {
-            display: block;
-        }
-
-        .results h2 {
-            margin-bottom: 8px;
-
-            color: var(--primary);
-
-            font-size: 1.8rem;
-        }
-
-        .results p {
-            margin-bottom: 28px;
-
-            color: var(--muted);
-
-            font-size: 0.8rem;
-        }
-
-        .results-grid {
-            display: grid;
-
-            grid-template-columns: repeat(3, 1fr);
-
-            gap: 12px;
-
-            margin-bottom: 28px;
-        }
-
-        .result-card {
-            padding: 18px 10px;
-
-            border: 1px solid var(--border);
-
-            border-radius: 12px;
-
-            background: var(--surface-2);
-        }
-
-        .result-card span {
-            display: block;
-
-            margin-bottom: 8px;
-
-            color: var(--muted);
-
-            font-size: 0.68rem;
-
-            text-transform: uppercase;
-        }
-
-        .result-card strong {
-            font-size: clamp(1.7rem, 5vw, 2.5rem);
-        }
-
-        /* ==============================
+        /* =====================================================
            STATUS
-        ============================== */
+        ===================================================== */
 
         .status {
+
             min-height: 18px;
 
             color: var(--muted);
@@ -533,103 +585,332 @@
             font-size: 0.7rem;
 
             text-align: center;
+
         }
 
-        /* ==============================
+
+        /* =====================================================
            INPUT INVISÍVEL
-        ============================== */
+        ===================================================== */
 
         #input-field {
+
             position: fixed;
 
             left: -10000px;
 
             width: 1px;
+
             height: 1px;
 
             opacity: 0;
+
         }
 
-        /* ==============================
+
+        /* =====================================================
+           BOTÕES
+        ===================================================== */
+
+        .controls {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 10px;
+
+        }
+
+
+        .btn {
+
+            padding: 10px 16px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 10px;
+
+            background:
+                var(--surface);
+
+            color: var(--text);
+
+            transition:
+                0.2s ease;
+
+        }
+
+
+        .btn:hover {
+
+            border-color:
+                var(--primary);
+
+            color:
+                var(--primary);
+
+            transform:
+                translateY(-1px);
+
+        }
+
+
+        .btn.primary {
+
+            border-color:
+                var(--primary);
+
+            background:
+                var(--primary);
+
+            color: #07120d;
+
+            font-weight: 700;
+
+        }
+
+
+        .btn.primary:hover {
+
+            background:
+                var(--primary-dark);
+
+            color: white;
+
+        }
+
+
+        /* =====================================================
+           RESULTADOS
+        ===================================================== */
+
+        .results {
+
+            display: none;
+
+            padding:
+                clamp(28px, 6vw, 50px);
+
+            text-align: center;
+
+        }
+
+
+        .results.show {
+
+            display: block;
+
+        }
+
+
+        .results h2 {
+
+            margin-bottom: 8px;
+
+            color:
+                var(--primary);
+
+            font-size: 1.8rem;
+
+        }
+
+
+        .results p {
+
+            margin-bottom: 28px;
+
+            color:
+                var(--muted);
+
+            font-size: 0.8rem;
+
+        }
+
+
+        .results-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 12px;
+
+            margin-bottom: 28px;
+
+        }
+
+
+        .result-card {
+
+            padding: 18px 10px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 12px;
+
+            background:
+                var(--surface-2);
+
+        }
+
+
+        .result-card span {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            color:
+                var(--muted);
+
+            font-size: 0.68rem;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .result-card strong {
+
+            font-size:
+                clamp(1.7rem, 5vw, 2.5rem);
+
+        }
+
+
+        /* =====================================================
            FOOTER
-        ============================== */
+        ===================================================== */
 
         footer {
-            color: var(--muted);
+
+            color:
+                var(--muted);
 
             font-size: 0.7rem;
 
             text-align: center;
+
         }
 
-        /* ==============================
+
+        /* =====================================================
            ANIMAÇÃO
-        ============================== */
+        ===================================================== */
 
         @keyframes blink {
+
             0%,
             45% {
+
                 opacity: 1;
+
             }
 
             50%,
             100% {
+
                 opacity: 0;
+
             }
+
         }
 
-        /* ==============================
+
+        /* =====================================================
            RESPONSIVIDADE
-        ============================== */
+        ===================================================== */
 
         @media (max-width: 620px) {
+
             body {
-                padding: 20px 12px;
+
+                padding:
+                    20px 12px;
 
                 gap: 20px;
+
             }
+
 
             .toolbar {
-                align-items: stretch;
 
-                flex-direction: column;
+                align-items:
+                    stretch;
+
+                flex-direction:
+                    column;
+
             }
+
 
             .toolbar-group {
-                justify-content: space-between;
+
+                justify-content:
+                    space-between;
+
             }
 
+
             .typing-panel {
+
                 min-height: 300px;
+
             }
+
 
             .stats,
             .results-grid {
-                grid-template-columns: 1fr;
+
+                grid-template-columns:
+                    1fr;
+
             }
+
 
             .stat {
+
                 border-right: 0;
 
-                border-bottom: 1px solid var(--border);
+                border-bottom:
+                    1px solid
+                    var(--border);
+
             }
+
 
             .stat:last-child {
+
                 border-bottom: 0;
+
             }
 
+
             .typing-hint {
+
                 display: none;
+
             }
+
         }
+
     </style>
+
 </head>
+
 
 <body>
 
-    <!-- ==========================================
+
+    <!-- =====================================================
          CABEÇALHO
-    =========================================== -->
+    ====================================================== -->
 
     <header>
 
@@ -645,6 +926,7 @@
 
         </div>
 
+
         <p class="subtitle">
             Teste sua velocidade, precisão e consistência
             de digitação em português.
@@ -653,13 +935,17 @@
     </header>
 
 
-    <!-- ==========================================
-         CONTEÚDO PRINCIPAL
-    =========================================== -->
+
+    <!-- =====================================================
+         CONTEÚDO
+    ====================================================== -->
 
     <main>
 
-        <!-- CONFIGURAÇÕES -->
+
+        <!-- =================================================
+             CONFIGURAÇÕES
+        ================================================== -->
 
         <section
             class="panel toolbar"
@@ -672,6 +958,7 @@
                     Duração
                 </span>
 
+
                 <select
                     id="duration-select"
                     aria-label="Duração do teste"
@@ -681,13 +968,19 @@
                         15 segundos
                     </option>
 
-                    <option value="30" selected>
+
+                    <option
+                        value="30"
+                        selected
+                    >
                         30 segundos
                     </option>
+
 
                     <option value="60">
                         60 segundos
                     </option>
+
 
                     <option value="120">
                         120 segundos
@@ -704,6 +997,7 @@
                     Atalho
                 </span>
 
+
                 <span class="subtitle">
                     Tab = reiniciar
                 </span>
@@ -713,7 +1007,10 @@
         </section>
 
 
-        <!-- ESTATÍSTICAS -->
+
+        <!-- =================================================
+             ESTATÍSTICAS
+        ================================================== -->
 
         <section
             class="panel stats"
@@ -721,11 +1018,13 @@
             aria-label="Estatísticas"
         >
 
+
             <div class="stat">
 
                 <span class="stat-label">
                     Tempo
                 </span>
+
 
                 <span
                     class="stat-value"
@@ -743,6 +1042,7 @@
                     WPM
                 </span>
 
+
                 <span
                     class="stat-value"
                     id="wpm"
@@ -759,6 +1059,7 @@
                     Precisão
                 </span>
 
+
                 <span
                     class="stat-value"
                     id="accuracy"
@@ -771,7 +1072,10 @@
         </section>
 
 
-        <!-- BARRA DE PROGRESSO -->
+
+        <!-- =================================================
+             PROGRESSO
+        ================================================== -->
 
         <div
             class="panel progress"
@@ -786,14 +1090,18 @@
         </div>
 
 
-        <!-- ÁREA DE DIGITAÇÃO -->
+
+        <!-- =================================================
+             ÁREA DE DIGITAÇÃO
+        ================================================== -->
 
         <section
             class="panel typing-panel"
             id="typing-panel"
             tabindex="0"
-            aria-label="Área de digitação. Clique aqui e comece a digitar."
+            aria-label="Área de digitação"
         >
+
 
             <input
                 id="input-field"
@@ -818,7 +1126,10 @@
         </section>
 
 
-        <!-- STATUS -->
+
+        <!-- =================================================
+             STATUS
+        ================================================== -->
 
         <p
             class="status"
@@ -828,7 +1139,10 @@
         </p>
 
 
-        <!-- RESULTADOS -->
+
+        <!-- =================================================
+             RESULTADOS
+        ================================================== -->
 
         <section
             class="panel results"
@@ -836,9 +1150,11 @@
             aria-live="polite"
         >
 
+
             <h2>
                 Teste finalizado!
             </h2>
+
 
             <p>
                 Veja seu desempenho nesta rodada.
@@ -847,11 +1163,13 @@
 
             <div class="results-grid">
 
+
                 <div class="result-card">
 
                     <span>
                         WPM
                     </span>
+
 
                     <strong id="final-wpm">
                         0
@@ -860,11 +1178,13 @@
                 </div>
 
 
+
                 <div class="result-card">
 
                     <span>
                         Precisão
                     </span>
+
 
                     <strong id="final-accuracy">
                         0%
@@ -873,11 +1193,13 @@
                 </div>
 
 
+
                 <div class="result-card">
 
                     <span>
                         Caracteres corretos
                     </span>
+
 
                     <strong id="final-correct">
                         0
@@ -898,7 +1220,10 @@
         </section>
 
 
-        <!-- CONTROLES -->
+
+        <!-- =================================================
+             CONTROLES
+        ================================================== -->
 
         <div
             class="controls"
@@ -917,9 +1242,10 @@
     </main>
 
 
-    <!-- ==========================================
+
+    <!-- =====================================================
          RODAPÉ
-    =========================================== -->
+    ====================================================== -->
 
     <footer>
 
@@ -930,164 +1256,632 @@
     </footer>
 
 
-    <!-- ==========================================
+
+    <!-- =====================================================
          JAVASCRIPT
-    =========================================== -->
+    ====================================================== -->
 
     <script>
 
         "use strict";
 
 
-        /* ==========================================
-           BANCO DE PALAVRAS
-        =========================================== */
+        /* =====================================================
+           PALAVRAS DO DIA A DIA
+        ===================================================== */
 
         const palavrasPt = [
 
+            /* ---------------------------------------------
+               CASA E COTIDIANO
+            --------------------------------------------- */
+
             "casa",
-            "carro",
-            "tempo",
+            "quarto",
+            "sala",
+            "cozinha",
+            "banheiro",
             "porta",
-            "livro",
+            "janela",
+            "mesa",
+            "cadeira",
+            "cama",
+            "sofá",
+            "parede",
+            "chão",
+            "teto",
+            "chave",
+            "roupa",
+            "sapato",
+            "mochila",
+            "celular",
+            "telefone",
+            "computador",
+            "televisão",
+            "controle",
+            "lâmpada",
+            "espelho",
+            "toalha",
+            "cobertor",
+            "travesseiro",
+            "geladeira",
+            "fogão",
+            "microondas",
+
+
+            /* ---------------------------------------------
+               PESSOAS
+            --------------------------------------------- */
+
+            "pessoa",
+            "amigo",
+            "amiga",
+            "família",
+            "mãe",
+            "pai",
+            "irmão",
+            "irmã",
+            "filho",
+            "filha",
+            "criança",
+            "homem",
+            "mulher",
+            "jovem",
+            "vizinho",
+            "colega",
+            "professor",
+            "professora",
+            "aluno",
+            "aluna",
+            "chefe",
+            "cliente",
+            "médico",
+            "médica",
+            "enfermeiro",
+            "enfermeira",
+
+
+            /* ---------------------------------------------
+               TEMPO E ROTINA
+            --------------------------------------------- */
+
+            "dia",
             "noite",
+            "manhã",
+            "tarde",
+            "hoje",
+            "ontem",
+            "amanhã",
+            "tempo",
+            "hora",
+            "minuto",
+            "segundo",
+            "semana",
+            "mês",
+            "ano",
+            "domingo",
+            "segunda",
+            "terça",
+            "quarta",
+            "quinta",
+            "sexta",
+            "sábado",
+            "agora",
+            "depois",
+            "antes",
+            "cedo",
+            "tarde",
+
+
+            /* ---------------------------------------------
+               TRABALHO E ESTUDO
+            --------------------------------------------- */
+
+            "trabalho",
+            "escola",
+            "faculdade",
+            "empresa",
+            "curso",
+            "aula",
+            "prova",
+            "tarefa",
+            "estudo",
+            "livro",
+            "caderno",
+            "caneta",
+            "lápis",
+            "papel",
+            "professor",
+            "aluno",
+            "reunião",
+            "projeto",
+            "equipe",
+            "chefe",
+            "cliente",
+            "dinheiro",
+            "salário",
+            "férias",
+            "emprego",
+            "vaga",
+            "entrevista",
+            "horário",
+
+
+            /* ---------------------------------------------
+               COMIDA
+            --------------------------------------------- */
+
+            "água",
+            "café",
+            "leite",
+            "suco",
+            "comida",
+            "arroz",
+            "feijão",
+            "carne",
+            "frango",
+            "peixe",
+            "pão",
+            "queijo",
+            "ovo",
+            "salada",
+            "fruta",
+            "maçã",
+            "banana",
+            "laranja",
+            "uva",
+            "morango",
+            "melancia",
+            "batata",
+            "tomate",
+            "cebola",
+            "cenoura",
+            "bolo",
+            "chocolate",
+            "sorvete",
+            "açúcar",
+            "sal",
+            "macarrão",
+            "pizza",
+            "hambúrguer",
+            "sanduíche",
+            "biscoito",
+            "jantar",
+            "almoço",
+            "café",
+            "lanche",
+            "restaurante",
+            "padaria",
+            "mercado",
+
+
+            /* ---------------------------------------------
+               AÇÕES
+            --------------------------------------------- */
+
+            "fazer",
+            "dizer",
             "falar",
+            "andar",
+            "correr",
             "comer",
             "beber",
-            "janela",
-            "computador",
-            "programação",
-            "desenvolvimento",
-            "português",
-            "escola",
-            "trabalho",
-            "amigo",
-            "família",
-            "cidade",
-            "viagem",
-            "história",
-            "palavra",
-            "teclado",
-            "velocidade",
-            "precisão",
-            "desafio",
-            "foco",
-            "estudo",
-            "ciência",
-            "natureza",
-            "planeta",
-            "universo",
-            "música",
-            "arte",
-            "pintura",
-            "sorriso",
+            "dormir",
+            "acordar",
+            "estudar",
+            "trabalhar",
+            "jogar",
+            "assistir",
+            "ouvir",
+            "ler",
+            "escrever",
+            "comprar",
+            "vender",
+            "pagar",
+            "abrir",
+            "fechar",
+            "entrar",
+            "sair",
+            "chegar",
+            "voltar",
+            "viajar",
+            "esperar",
+            "ajudar",
+            "começar",
+            "terminar",
+            "pensar",
+            "gostar",
+            "amar",
+            "querer",
+            "precisar",
+            "lembrar",
+            "esquecer",
+            "buscar",
+            "encontrar",
+            "perder",
+            "ganhar",
+            "conversar",
+            "perguntar",
+            "responder",
+            "aprender",
+            "ensinar",
+            "cantar",
+            "dançar",
+            "dirigir",
+            "cozinhar",
+            "limpar",
+            "lavar",
+            "arrumar",
+            "consertar",
+
+
+            /* ---------------------------------------------
+               SENTIMENTOS
+            --------------------------------------------- */
+
+            "amor",
+            "amizade",
             "alegria",
+            "tristeza",
+            "medo",
+            "raiva",
+            "calma",
+            "felicidade",
+            "saudade",
+            "esperança",
+            "vontade",
+            "força",
             "coragem",
-            "liberdade",
+            "paciência",
             "verdade",
-            "pássaro",
-            "oceano",
+            "mentira",
+            "problema",
+            "resposta",
+            "ideia",
+            "razão",
+            "sonho",
+            "confiança",
+            "respeito",
+            "orgulho",
+            "vergonha",
+            "surpresa",
+            "preocupação",
+
+
+            /* ---------------------------------------------
+               LUGARES
+            --------------------------------------------- */
+
+            "mercado",
+            "loja",
+            "padaria",
+            "restaurante",
+            "hospital",
+            "farmácia",
+            "escola",
+            "faculdade",
+            "empresa",
+            "banco",
+            "praça",
+            "parque",
+            "praia",
+            "shopping",
+            "cinema",
+            "teatro",
+            "igreja",
+            "academia",
+            "estação",
+            "aeroporto",
+            "cidade",
+            "bairro",
+            "rua",
+            "avenida",
+            "casa",
+            "trabalho",
+            "hotel",
+            "hotel",
+            "mercado",
+
+
+            /* ---------------------------------------------
+               TRANSPORTE
+            --------------------------------------------- */
+
+            "ônibus",
+            "carro",
+            "moto",
+            "bicicleta",
+            "trem",
+            "metrô",
+            "avião",
+            "táxi",
+            "uber",
+            "caminhão",
+            "viagem",
+            "estrada",
+            "trânsito",
+            "motorista",
+            "passageiro",
+            "bilhete",
+            "passagem",
+
+
+            /* ---------------------------------------------
+               TECNOLOGIA DO DIA A DIA
+            --------------------------------------------- */
+
+            "internet",
+            "senha",
+            "mensagem",
+            "foto",
+            "vídeo",
+            "música",
+            "filme",
+            "jogo",
+            "aplicativo",
+            "site",
+            "email",
+            "conta",
+            "perfil",
+            "arquivo",
+            "imagem",
+            "notícia",
+            "rede",
+            "bateria",
+            "carregador",
+            "fone",
+            "fones",
+            "telefone",
+            "celular",
+            "computador",
+            "tela",
+            "teclado",
+            "mouse",
+            "câmera",
+            "internet",
+            "senha",
+
+
+            /* ---------------------------------------------
+               NATUREZA
+            --------------------------------------------- */
+
+            "água",
+            "mar",
+            "rio",
+            "praia",
+            "sol",
+            "lua",
+            "estrela",
+            "céu",
+            "chuva",
+            "vento",
+            "nuvem",
+            "flor",
+            "árvore",
+            "folha",
+            "terra",
             "montanha",
             "floresta",
-            "estrela",
-            "silêncio",
-            "energia",
-            "tecnologia",
-            "software",
-            "internet",
-            "sistema",
-            "servidor",
-            "aplicativo",
-            "código",
-            "projeto",
-            "programador",
-            "desempenho",
-            "aprendizado",
-            "conhecimento",
-            "criatividade",
-            "desenvolvedor",
-            "computação",
-            "informação",
-            "segurança",
-            "estrutura",
-            "algoritmo",
-            "variável",
-            "função",
-            "linguagem",
-            "javascript",
-            "html",
-            "estilo",
-            "interface",
-            "usuário",
-            "tecnologia",
-            "inovação"
+            "animal",
+            "cachorro",
+            "gato",
+            "pássaro",
+            "peixe",
+            "cavalo",
+            "borboleta",
+            "abelha",
+            "formiga",
+            "grama",
+            "jardim",
+            "rio",
+            "lago",
+
+
+            /* ---------------------------------------------
+               CARACTERÍSTICAS
+            --------------------------------------------- */
+
+            "grande",
+            "pequeno",
+            "bonito",
+            "bonita",
+            "rápido",
+            "rápida",
+            "lento",
+            "lenta",
+            "novo",
+            "nova",
+            "velho",
+            "velha",
+            "fácil",
+            "difícil",
+            "melhor",
+            "pior",
+            "certo",
+            "errado",
+            "primeiro",
+            "último",
+            "muito",
+            "pouco",
+            "sempre",
+            "nunca",
+            "agora",
+            "depois",
+            "antes",
+            "perto",
+            "longe",
+            "alto",
+            "baixo",
+            "forte",
+            "fraco",
+            "feliz",
+            "triste",
+            "quente",
+            "frio",
+            "novo",
+            "antigo",
+            "simples",
+            "importante",
+            "especial",
+            "normal",
+            "diferente",
+            "igual",
+            "melhor",
+            "pior",
+
+
+            /* ---------------------------------------------
+               PALAVRAS EXTRAS DO COTIDIANO
+            --------------------------------------------- */
+
+            "vida",
+            "mundo",
+            "coisa",
+            "pessoa",
+            "lugar",
+            "momento",
+            "forma",
+            "jeito",
+            "parte",
+            "vez",
+            "lado",
+            "fim",
+            "começo",
+            "meio",
+            "nome",
+            "número",
+            "pergunta",
+            "resposta",
+            "história",
+            "palavra",
+            "verdade",
+            "motivo",
+            "exemplo",
+            "situação",
+            "questão",
+            "mudança",
+            "chance",
+            "escolha",
+            "resultado",
+            "sucesso",
+            "erro",
+            "ajuda",
+            "atenção",
+            "cuidado",
+            "futuro",
+            "passado",
+            "presente",
+
+
+            /* ---------------------------------------------
+               PALAVRA EXTREMAMENTE LONGA
+               
+               😈 DESAFIO ESPECIAL
+            --------------------------------------------- */
+
+            "pneumoultramicroscopicossilicovulcanoconiótico"
 
         ];
 
 
-        /* ==========================================
-           REFERÊNCIAS DOS ELEMENTOS
-        =========================================== */
+        /* =====================================================
+           REFERÊNCIAS HTML
+        ===================================================== */
 
         const refs = {
 
             duration:
-                document.getElementById("duration-select"),
+                document.getElementById(
+                    "duration-select"
+                ),
 
             input:
-                document.getElementById("input-field"),
+                document.getElementById(
+                    "input-field"
+                ),
 
             words:
-                document.getElementById("words-display"),
+                document.getElementById(
+                    "words-display"
+                ),
 
             panel:
-                document.getElementById("typing-panel"),
+                document.getElementById(
+                    "typing-panel"
+                ),
 
             stats:
-                document.getElementById("stats-panel"),
+                document.getElementById(
+                    "stats-panel"
+                ),
 
             controls:
-                document.getElementById("controls"),
+                document.getElementById(
+                    "controls"
+                ),
 
             results:
-                document.getElementById("results"),
+                document.getElementById(
+                    "results"
+                ),
 
             timer:
-                document.getElementById("timer"),
+                document.getElementById(
+                    "timer"
+                ),
 
             wpm:
-                document.getElementById("wpm"),
+                document.getElementById(
+                    "wpm"
+                ),
 
             accuracy:
-                document.getElementById("accuracy"),
+                document.getElementById(
+                    "accuracy"
+                ),
 
             progress:
-                document.getElementById("progress-bar"),
+                document.getElementById(
+                    "progress-bar"
+                ),
 
             status:
-                document.getElementById("status"),
+                document.getElementById(
+                    "status"
+                ),
 
             finalWpm:
-                document.getElementById("final-wpm"),
+                document.getElementById(
+                    "final-wpm"
+                ),
 
             finalAccuracy:
-                document.getElementById("final-accuracy"),
+                document.getElementById(
+                    "final-accuracy"
+                ),
 
             finalCorrect:
-                document.getElementById("final-correct"),
+                document.getElementById(
+                    "final-correct"
+                ),
 
             restart:
-                document.getElementById("restart-button"),
+                document.getElementById(
+                    "restart-button"
+                ),
 
             restartResult:
-                document.getElementById("restart-result")
+                document.getElementById(
+                    "restart-result"
+                )
 
         };
 
 
-        /* ==========================================
+        /* =====================================================
            ESTADO DO JOGO
-        =========================================== */
+        ===================================================== */
 
         const state = {
 
@@ -1112,9 +1906,9 @@
         };
 
 
-        /* ==========================================
+        /* =====================================================
            PALAVRA ALEATÓRIA
-        =========================================== */
+        ===================================================== */
 
         function randomWord() {
 
@@ -1129,11 +1923,13 @@
         }
 
 
-        /* ==========================================
+        /* =====================================================
            GERAR PALAVRAS
-        =========================================== */
+        ===================================================== */
 
-        function generateWords(amount = 60) {
+        function generateWords(
+            amount = 70
+        ) {
 
             state.words =
                 Array.from(
@@ -1148,9 +1944,9 @@
         }
 
 
-        /* ==========================================
+        /* =====================================================
            RENDERIZAR PALAVRAS
-        =========================================== */
+        ===================================================== */
 
         function renderWords() {
 
@@ -1158,12 +1954,19 @@
 
 
             state.words.forEach(
-                (word, wordIndex) => {
+                (
+                    word,
+                    wordIndex
+                ) => {
 
                     const wordElement =
-                        document.createElement("span");
+                        document.createElement(
+                            "span"
+                        );
 
-                    wordElement.className = "word";
+
+                    wordElement.className =
+                        "word";
 
 
                     if (
@@ -1179,11 +1982,13 @@
 
 
                     /*
-                     * Cada letra recebe
-                     * seu próprio elemento.
+                     * Cria cada letra
+                     * individualmente.
                      */
 
-                    [...word].forEach(
+                    [
+                        ...word
+                    ].forEach(
                         (letter) => {
 
                             const letterElement =
@@ -1191,11 +1996,14 @@
                                     "span"
                                 );
 
+
                             letterElement.className =
                                 "letter";
 
+
                             letterElement.textContent =
                                 letter;
+
 
                             wordElement.appendChild(
                                 letterElement
@@ -1218,9 +2026,9 @@
         }
 
 
-        /* ==========================================
-           ATUALIZAR VISUAL DA PALAVRA
-        =========================================== */
+        /* =====================================================
+           ATUALIZAR PALAVRA ATUAL
+        ===================================================== */
 
         function updateCurrentWordVisual() {
 
@@ -1231,7 +2039,9 @@
 
 
             if (!wordElement) {
+
                 return;
+
             }
 
 
@@ -1250,7 +2060,7 @@
 
 
             /*
-             * Limpa estados antigos.
+             * Limpa classes antigas.
              */
 
             letters.forEach(
@@ -1267,11 +2077,14 @@
 
 
             /*
-             * Verifica cada letra.
+             * Analisa cada letra digitada.
              */
 
             typed.forEach(
-                (character, index) => {
+                (
+                    character,
+                    index
+                ) => {
 
                     if (
                         index <
@@ -1280,7 +2093,8 @@
 
                         if (
                             character ===
-                            letters[index].textContent
+                            letters[index]
+                                .textContent
                         ) {
 
                             letters[index]
@@ -1304,21 +2118,25 @@
 
 
             /*
-             * Remove caracteres extras
-             * criados anteriormente.
+             * Remove caracteres extras.
              */
 
             wordElement
-                .querySelectorAll(".extra")
+                .querySelectorAll(
+                    ".extra"
+                )
                 .forEach(
                     (element) => {
+
                         element.remove();
+
                     }
                 );
 
 
             /*
-             * Mostra caracteres extras.
+             * Mostra caracteres
+             * digitados além da palavra.
              */
 
             if (
@@ -1327,7 +2145,9 @@
             ) {
 
                 typed
-                    .slice(letters.length)
+                    .slice(
+                        letters.length
+                    )
                     .forEach(
                         (character) => {
 
@@ -1336,11 +2156,14 @@
                                     "span"
                                 );
 
+
                             extra.className =
                                 "extra";
 
+
                             extra.textContent =
                                 character;
+
 
                             wordElement.appendChild(
                                 extra
@@ -1372,13 +2195,15 @@
         }
 
 
-        /* ==========================================
-           FOCO NO INPUT
-        =========================================== */
+        /* =====================================================
+           FOCO
+        ===================================================== */
 
         function focusInput() {
 
-            if (!state.finished) {
+            if (
+                !state.finished
+            ) {
 
                 refs.input.focus({
                     preventScroll: true
@@ -1389,9 +2214,9 @@
         }
 
 
-        /* ==========================================
+        /* =====================================================
            CALCULAR ESTATÍSTICAS
-        =========================================== */
+        ===================================================== */
 
         function calculateCurrentStats() {
 
@@ -1401,16 +2226,20 @@
 
 
             /*
-             * Palavras já finalizadas.
+             * Palavras concluídas.
              */
 
             for (
-                const result of state.completed
+                const result
+                of state.completed
             ) {
 
-                correct += result.correct;
+                correct +=
+                    result.correct;
 
-                incorrect += result.incorrect;
+
+                incorrect +=
+                    result.incorrect;
 
             }
 
@@ -1438,7 +2267,10 @@
 
 
             typed.forEach(
-                (character, index) => {
+                (
+                    character,
+                    index
+                ) => {
 
                     if (
                         index <
@@ -1460,7 +2292,7 @@
 
 
             /*
-             * Tempo usado.
+             * Tempo utilizado.
              */
 
             const elapsedSeconds =
@@ -1476,7 +2308,9 @@
 
 
             /*
-             * WPM padrão:
+             * WPM.
+             *
+             * Padrão:
              *
              * caracteres corretos / 5
              * dividido pelo tempo em minutos.
@@ -1486,7 +2320,9 @@
                 Math.max(
                     0,
                     Math.round(
-                        (correct / 5) /
+                        (
+                            correct / 5
+                        ) /
                         minutes
                     )
                 );
@@ -1505,16 +2341,21 @@
                 total === 0
                     ? 100
                     : Math.round(
-                        (correct / total) *
-                        100
+                        (
+                            correct /
+                            total
+                        ) * 100
                     );
 
 
             return {
 
                 correct,
+
                 incorrect,
+
                 wpm,
+
                 accuracy
 
             };
@@ -1522,9 +2363,9 @@
         }
 
 
-        /* ==========================================
-           ATUALIZAR ESTATÍSTICAS NA TELA
-        =========================================== */
+        /* =====================================================
+           ATUALIZAR ESTATÍSTICAS
+        ===================================================== */
 
         function updateStats() {
 
@@ -1541,7 +2382,7 @@
 
 
             /*
-             * Atualiza a barra de progresso.
+             * Barra de progresso.
              */
 
             const progress =
@@ -1550,17 +2391,19 @@
 
 
             refs.progress.style.transform =
-                `scaleX(${Math.max(
-                    0,
-                    progress
-                )})`;
+                `scaleX(${
+                    Math.max(
+                        0,
+                        progress
+                    )
+                })`;
 
         }
 
 
-        /* ==========================================
+        /* =====================================================
            INICIAR JOGO
-        =========================================== */
+        ===================================================== */
 
         function startGame() {
 
@@ -1615,9 +2458,9 @@
         }
 
 
-        /* ==========================================
+        /* =====================================================
            FINALIZAR PALAVRA
-        =========================================== */
+        ===================================================== */
 
         function finalizeCurrentWord() {
 
@@ -1626,11 +2469,6 @@
                     state.currentIndex
                 ];
 
-
-            /*
-             * Não faz nada se não houver
-             * palavra ou texto digitado.
-             */
 
             if (
                 !target ||
@@ -1660,11 +2498,14 @@
 
 
             /*
-             * Verifica caracteres digitados.
+             * Verifica caracteres.
              */
 
             typed.forEach(
-                (character, index) => {
+                (
+                    character,
+                    index
+                ) => {
 
                     if (
                         index <
@@ -1686,8 +2527,7 @@
 
 
             /*
-             * Letras que faltaram também
-             * contam como erro.
+             * Caracteres que faltaram.
              */
 
             if (
@@ -1703,19 +2543,20 @@
 
 
             /*
-             * Salva resultado da palavra.
+             * Salva resultado.
              */
 
             state.completed.push({
 
                 correct,
+
                 incorrect
 
             });
 
 
             /*
-             * Vai para a próxima palavra.
+             * Próxima palavra.
              */
 
             state.currentIndex++;
@@ -1724,19 +2565,19 @@
 
 
             /*
-             * Se estiver chegando ao final,
-             * adiciona mais palavras.
+             * Adiciona novas palavras
+             * quando necessário.
              */
 
             if (
                 state.currentIndex >=
-                state.words.length - 10
+                state.words.length - 15
             ) {
 
                 state.words.push(
                     ...Array.from(
                         {
-                            length: 30
+                            length: 40
                         },
                         randomWord
                     )
@@ -1759,22 +2600,29 @@
         }
 
 
-        /* ==========================================
+        /* =====================================================
            INPUT
-        =========================================== */
+        ===================================================== */
 
         function handleInput() {
 
-            if (state.finished) {
+            if (
+                state.finished
+            ) {
+
                 return;
+
             }
 
 
             /*
-             * Primeiro caractere inicia o jogo.
+             * Primeiro caractere
+             * inicia o cronômetro.
              */
 
-            if (!state.started) {
+            if (
+                !state.started
+            ) {
 
                 startGame();
 
@@ -1782,8 +2630,8 @@
 
 
             /*
-             * Remove espaços do input.
-             * O espaço é tratado separadamente.
+             * Espaços são tratados
+             * pelo evento de teclado.
              */
 
             state.currentTyped =
@@ -1795,19 +2643,22 @@
 
             updateCurrentWordVisual();
 
+
             updateStats();
 
         }
 
 
-        /* ==========================================
-           TECLAS
-        =========================================== */
+        /* =====================================================
+           TECLADO
+        ===================================================== */
 
-        function handleKeydown(event) {
+        function handleKeydown(
+            event
+        ) {
 
             /*
-             * Tab reinicia.
+             * TAB
              */
 
             if (
@@ -1824,7 +2675,7 @@
 
 
             /*
-             * Espaço finaliza palavra.
+             * ESPAÇO
              */
 
             if (
@@ -1842,8 +2693,7 @@
 
 
             /*
-             * Enter também pode
-             * finalizar a palavra.
+             * ENTER
              */
 
             if (
@@ -1859,19 +2709,23 @@
         }
 
 
-        /* ==========================================
+        /* =====================================================
            FINALIZAR JOGO
-        =========================================== */
+        ===================================================== */
 
         function finishGame() {
 
-            if (state.finished) {
+            if (
+                state.finished
+            ) {
+
                 return;
+
             }
 
 
             /*
-             * Para o temporizador.
+             * Para cronômetro.
              */
 
             clearInterval(
@@ -1881,13 +2735,15 @@
 
             state.timerId = null;
 
+
             state.finished = true;
+
 
             state.started = false;
 
 
             /*
-             * Calcula resultado final.
+             * Resultado final.
              */
 
             const stats =
@@ -1907,7 +2763,7 @@
 
 
             /*
-             * Esconde área do jogo.
+             * Esconde elementos.
              */
 
             refs.stats.style.display =
@@ -1946,14 +2802,14 @@
         }
 
 
-        /* ==========================================
-           REINICIAR JOGO
-        =========================================== */
+        /* =====================================================
+           REINICIAR
+        ===================================================== */
 
         function resetGame() {
 
             /*
-             * Cancela temporizador anterior.
+             * Cancela cronômetro anterior.
              */
 
             clearInterval(
@@ -1962,7 +2818,7 @@
 
 
             /*
-             * Lê duração selecionada.
+             * Obtém duração.
              */
 
             state.duration =
@@ -1975,21 +2831,32 @@
                 state.duration;
 
 
-            state.timerId = null;
+            state.timerId =
+                null;
 
-            state.started = false;
 
-            state.finished = false;
+            state.started =
+                false;
 
-            state.currentIndex = 0;
 
-            state.currentTyped = "";
+            state.finished =
+                false;
 
-            state.completed = [];
+
+            state.currentIndex =
+                0;
+
+
+            state.currentTyped =
+                "";
+
+
+            state.completed =
+                [];
 
 
             /*
-             * Atualiza interface.
+             * Atualiza estatísticas.
              */
 
             refs.timer.textContent =
@@ -2009,7 +2876,7 @@
 
 
             /*
-             * Mostra novamente o jogo.
+             * Restaura interface.
              */
 
             refs.stats.style.display =
@@ -2036,13 +2903,14 @@
 
 
             /*
-             * Gera novas palavras.
+             * Gera palavras.
              */
 
             generateWords();
 
 
-            refs.input.value = "";
+            refs.input.value =
+                "";
 
 
             focusInput();
@@ -2050,9 +2918,9 @@
         }
 
 
-        /* ==========================================
+        /* =====================================================
            EVENTOS
-        =========================================== */
+        ===================================================== */
 
         refs.input.addEventListener(
             "input",
@@ -2077,29 +2945,7 @@
 
 
         /*
-         * Teclas digitáveis na área.
-         */
-
-        refs.panel.addEventListener(
-            "keydown",
-            (event) => {
-
-                if (
-                    event.key.length === 1 ||
-                    event.key === "Backspace" ||
-                    event.key === "Space"
-                ) {
-
-                    focusInput();
-
-                }
-
-            }
-        );
-
-
-        /*
-         * Botão reiniciar.
+         * Reiniciar.
          */
 
         refs.restart.addEventListener(
@@ -2109,7 +2955,7 @@
 
 
         /*
-         * Botão da tela de resultados.
+         * Reiniciar pela tela final.
          */
 
         refs.restartResult.addEventListener(
@@ -2119,7 +2965,7 @@
 
 
         /*
-         * Alteração da duração.
+         * Alterar duração.
          */
 
         refs.duration.addEventListener(
@@ -2129,7 +2975,7 @@
 
 
         /*
-         * Atalho global Tab.
+         * TAB em qualquer lugar.
          */
 
         document.addEventListener(
@@ -2150,16 +2996,21 @@
         );
 
 
-        /* ==========================================
+        /* =====================================================
            INICIALIZAÇÃO
-        =========================================== */
+        ===================================================== */
 
         window.addEventListener(
             "load",
-            resetGame
+            () => {
+
+                resetGame();
+
+            }
         );
 
     </script>
 
 </body>
+
 </html>
