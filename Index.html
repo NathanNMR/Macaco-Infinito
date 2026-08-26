@@ -12,76 +12,83 @@
 
     <meta
         name="description"
-        content="Teste sua velocidade e precisão de digitação em português."
+        content="Macaco Infinito — teste sua velocidade e precisão de digitação."
     >
 
-    <title>
-        PortugueseType — Desafio de Digitação
-    </title>
+    <title>Macaco Infinito — Teste de Digitação</title>
 
 
     <style>
 
-        /* =====================================================
-           VARIÁVEIS
-        ===================================================== */
+        /* =========================================================
+           CONFIGURAÇÕES GERAIS
+        ========================================================= */
 
         :root {
 
-            --bg: #0d0f12;
+            --background: #090b0f;
 
-            --surface: #171a1f;
+            --background-light: #0f1319;
 
-            --surface-2: #1e2229;
+            --surface: #13171e;
 
-            --border: #2a3038;
+            --surface-hover: #191e26;
 
-            --text: #f2f4f7;
+            --border: #252b35;
 
-            --muted: #8d96a3;
+            --text: #f4f7f8;
 
-            --primary: #00d084;
+            --text-soft: #aab2bd;
 
-            --primary-dark: #00a96a;
+            --text-dark: #68717d;
 
-            --error: #ff5d6c;
+            --primary: #f5b942;
 
-            --warning: #ffca3a;
+            --primary-light: #ffd166;
+
+            --success: #43d17a;
+
+            --error: #ff5c70;
+
+            --white: #ffffff;
 
             --shadow:
-                0 20px 60px rgba(0, 0, 0, 0.28);
+                0 25px 70px rgba(0, 0, 0, 0.40);
 
-            --radius: 16px;
+            --radius-large: 22px;
 
-            --font:
+            --radius-medium: 14px;
+
+            --radius-small: 9px;
+
+            --typing-font:
                 "JetBrains Mono",
                 "Cascadia Code",
+                "Fira Code",
                 "Courier New",
                 monospace;
 
         }
 
 
-        /* =====================================================
+        /* =========================================================
            RESET
-        ===================================================== */
+        ========================================================= */
 
         * {
-
-            box-sizing: border-box;
 
             margin: 0;
 
             padding: 0;
+
+            box-sizing: border-box;
 
         }
 
 
         html {
 
-            min-height: 100%;
-
-            background: var(--bg);
+            scroll-behavior: smooth;
 
         }
 
@@ -90,29 +97,28 @@
 
             min-height: 100vh;
 
-            padding: 32px 20px;
-
-            display: flex;
-
-            flex-direction: column;
-
-            align-items: center;
-
-            gap: 28px;
-
             background:
 
                 radial-gradient(
-                    circle at top,
-                    rgba(0, 208, 132, 0.08),
+                    circle at 50% -10%,
+                    rgba(245, 185, 66, 0.10),
                     transparent 35%
                 ),
 
-                var(--bg);
+                var(--background);
 
             color: var(--text);
 
-            font-family: var(--font);
+            font-family:
+                Inter,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            padding:
+                35px 18px 30px;
 
         }
 
@@ -126,220 +132,296 @@
         }
 
 
-        button,
-        select {
+        button {
 
             cursor: pointer;
 
         }
 
 
-        button:focus-visible,
-        select:focus-visible {
+        /* =========================================================
+           CONTAINER
+        ========================================================= */
 
-            outline: 2px solid var(--primary);
+        .container {
 
-            outline-offset: 3px;
+            width: min(1100px, 100%);
+
+            margin: 0 auto;
 
         }
 
 
-        /* =====================================================
-           CABEÇALHO
-        ===================================================== */
+        /* =========================================================
+           HEADER
+        ========================================================= */
 
-        header {
+        .header {
 
-            width: min(100%, 960px);
+            display: flex;
 
-            text-align: center;
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            margin-bottom: 30px;
 
         }
 
 
         .brand {
 
-            display: inline-flex;
+            display: flex;
 
             align-items: center;
 
-            gap: 10px;
-
-            margin-bottom: 8px;
+            gap: 14px;
 
         }
 
 
-        .brand-icon {
+        .monkey-logo {
 
-            width: 40px;
+            width: 54px;
 
-            height: 40px;
+            height: 54px;
 
             display: grid;
 
             place-items: center;
 
-            border:
-                1px solid
-                rgba(0, 208, 132, 0.3);
-
-            border-radius: 10px;
+            border-radius: 16px;
 
             background:
-                rgba(0, 208, 132, 0.08);
+                linear-gradient(
+                    145deg,
+                    #ffd166,
+                    #e5a72f
+                );
 
-            color: var(--primary);
+            box-shadow:
+                0 10px 30px
+                rgba(245, 185, 66, 0.16);
 
-            font-size: 19px;
+            font-size: 30px;
 
         }
 
 
-        h1 {
-
-            color: var(--primary);
+        .brand-name {
 
             font-size:
-                clamp(1.5rem, 4vw, 2.2rem);
+                clamp(1.45rem, 4vw, 1.9rem);
+
+            font-weight: 800;
 
             letter-spacing: -0.05em;
 
         }
 
 
-        .subtitle {
+        .brand-name span {
 
-            color: var(--muted);
-
-            font-size: 0.85rem;
-
-            line-height: 1.6;
+            color: var(--primary);
 
         }
 
 
-        /* =====================================================
-           MAIN
-        ===================================================== */
+        .brand-subtitle {
 
-        main {
+            margin-top: 3px;
 
-            width: min(100%, 960px);
+            color: var(--text-dark);
 
-            display: grid;
-
-            gap: 16px;
+            font-size: 0.78rem;
 
         }
 
 
-        .panel {
+        .keyboard-hint {
+
+            padding: 9px 13px;
 
             border:
-                1px solid
-                var(--border);
+                1px solid var(--border);
 
-            border-radius:
-                var(--radius);
+            border-radius: 10px;
 
-            background:
-                rgba(23, 26, 31, 0.92);
+            color: var(--text-dark);
 
-            box-shadow:
-                var(--shadow);
-
-        }
-
-
-        /* =====================================================
-           CONFIGURAÇÕES
-        ===================================================== */
-
-        .toolbar {
-
-            padding: 14px 16px;
-
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: center;
-
-            gap: 16px;
-
-        }
-
-
-        .toolbar-group {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 10px;
-
-        }
-
-
-        .toolbar-label {
-
-            color: var(--muted);
+            font-family: var(--typing-font);
 
             font-size: 0.72rem;
 
-            text-transform: uppercase;
+        }
 
-            letter-spacing: 0.08em;
+
+        .keyboard-hint kbd {
+
+            color: var(--text-soft);
 
         }
 
 
-        select {
+        /* =========================================================
+           PAINEL PRINCIPAL
+        ========================================================= */
 
-            min-width: 110px;
-
-            padding: 8px 10px;
+        .game {
 
             border:
-                1px solid
-                var(--border);
+                1px solid var(--border);
 
-            border-radius: 9px;
+            border-radius:
+                var(--radius-large);
 
             background:
-                var(--surface-2);
+                linear-gradient(
+                    145deg,
+                    rgba(19, 23, 30, 0.98),
+                    rgba(13, 16, 21, 0.98)
+                );
 
-            color: var(--text);
-
-        }
-
-
-        /* =====================================================
-           ESTATÍSTICAS
-        ===================================================== */
-
-        .stats {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
+            box-shadow:
+                var(--shadow);
 
             overflow: hidden;
 
         }
 
 
+        /* =========================================================
+           BARRA SUPERIOR
+        ========================================================= */
+
+        .game-top {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding:
+                18px 24px;
+
+            border-bottom:
+                1px solid var(--border);
+
+        }
+
+
+        .mode {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            color: var(--text-soft);
+
+            font-size: 0.78rem;
+
+        }
+
+
+        .mode-dot {
+
+            width: 8px;
+
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: var(--primary);
+
+            box-shadow:
+                0 0 12px
+                rgba(245, 185, 66, 0.7);
+
+        }
+
+
+        .duration {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+        }
+
+
+        .duration-label {
+
+            color: var(--text-dark);
+
+            font-size: 0.72rem;
+
+        }
+
+
+        select {
+
+            padding:
+                7px 10px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 8px;
+
+            outline: none;
+
+            background: var(--surface);
+
+            color: var(--text-soft);
+
+            cursor: pointer;
+
+        }
+
+
+        select:focus {
+
+            border-color:
+                var(--primary);
+
+        }
+
+
+        /* =========================================================
+           ESTATÍSTICAS
+        ========================================================= */
+
+        .statistics {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            border-bottom:
+                1px solid var(--border);
+
+        }
+
+
         .stat {
 
-            padding: 18px;
+            padding:
+                20px;
 
             text-align: center;
 
             border-right:
-                1px solid
-                var(--border);
+                1px solid var(--border);
 
         }
 
@@ -355,121 +437,156 @@
 
             display: block;
 
-            margin-bottom: 6px;
+            margin-bottom: 5px;
 
-            color: var(--muted);
+            color: var(--text-dark);
 
-            font-size: 0.68rem;
+            font-size: 0.65rem;
+
+            font-weight: 700;
+
+            letter-spacing: 0.12em;
 
             text-transform: uppercase;
-
-            letter-spacing: 0.08em;
 
         }
 
 
         .stat-value {
 
-            color: var(--primary);
+            color: var(--text);
+
+            font-family: var(--typing-font);
 
             font-size:
-                clamp(1.3rem, 4vw, 1.8rem);
+                clamp(1.4rem, 4vw, 1.9rem);
 
             font-weight: 700;
 
         }
 
 
-        /* =====================================================
-           BARRA DE PROGRESSO
-        ===================================================== */
+        .stat-value.highlight {
 
-        .progress {
-
-            height: 4px;
-
-            background:
-                var(--surface-2);
-
-            overflow: hidden;
+            color: var(--primary);
 
         }
 
 
-        .progress-bar {
+        /* =========================================================
+           PROGRESSO
+        ========================================================= */
+
+        .progress-container {
+
+            height: 3px;
+
+            background:
+                rgba(255, 255, 255, 0.03);
+
+        }
+
+
+        .progress {
 
             width: 100%;
 
             height: 100%;
 
-            background:
-                var(--primary);
+            transform-origin: left center;
 
-            transform-origin: left;
+            background: var(--primary);
 
             transition:
-                transform 0.25s linear;
+                transform 0.2s linear;
 
         }
 
 
-        /* =====================================================
+        /* =========================================================
            ÁREA DE DIGITAÇÃO
-        ===================================================== */
+        ========================================================= */
 
-        .typing-panel {
-
-            min-height: 290px;
+        .typing-section {
 
             padding:
-                clamp(20px, 5vw, 40px);
+                clamp(25px, 5vw, 55px);
 
-            display: flex;
+        }
 
-            align-items: center;
+
+        .typing-area {
+
+            min-height: 300px;
 
             position: relative;
 
-            overflow: hidden;
+            padding:
+                28px 10px;
+
+            border:
+                1px solid transparent;
+
+            border-radius:
+                var(--radius-medium);
+
+            cursor: text;
+
+            transition:
+                border-color 0.25s,
+                background 0.25s;
 
         }
 
 
-        .typing-panel.running {
+        .typing-area:hover {
+
+            background:
+                rgba(255, 255, 255, 0.012);
+
+        }
+
+
+        .typing-area.active {
 
             border-color:
-                rgba(0, 208, 132, 0.35);
+                rgba(245, 185, 66, 0.14);
+
+            background:
+                rgba(245, 185, 66, 0.015);
 
         }
 
 
-        .typing-panel.finished {
+        /* =========================================================
+           TEXTO
+        ========================================================= */
 
-            display: none;
-
-        }
-
-
-        .words {
+        .typing-text {
 
             width: 100%;
 
-            max-height: 175px;
+            max-height: 185px;
 
             overflow: hidden;
 
-            display: flex;
-
-            flex-wrap: wrap;
-
-            align-content: flex-start;
-
-            gap: 9px 12px;
+            font-family:
+                var(--typing-font);
 
             font-size:
-                clamp(1.15rem, 3vw, 1.55rem);
+                clamp(
+                    1.15rem,
+                    3vw,
+                    1.55rem
+                );
 
-            line-height: 1.8;
+            font-weight: 500;
+
+            line-height: 1.85;
+
+            letter-spacing: -0.025em;
+
+            word-spacing: 0.12em;
 
             user-select: none;
 
@@ -478,18 +595,22 @@
 
         .word {
 
-            position: relative;
+            display: inline;
 
-            display: inline-flex;
+            white-space: nowrap;
 
-            color: var(--muted);
+            color:
+                var(--text-dark);
+
+            transition:
+                color 0.1s;
 
         }
 
 
         .word.current {
 
-            color: var(--text);
+            color: var(--text-soft);
 
         }
 
@@ -498,145 +619,244 @@
 
             position: relative;
 
+            transition:
+                color 0.08s,
+                background 0.08s;
+
         }
 
+
+        /* =========================================================
+           LETRAS CORRETAS
+        ========================================================= */
 
         .letter.correct {
 
-            color: var(--text);
+            color:
+                var(--text);
 
         }
 
+
+        /* =========================================================
+           LETRAS ERRADAS
+        ========================================================= */
 
         .letter.incorrect {
 
-            color: var(--error);
+            color:
+                var(--error);
 
             background:
-                rgba(255, 93, 108, 0.14);
+                rgba(255, 92, 112, 0.10);
 
-            border-radius: 2px;
+            border-radius: 3px;
 
         }
 
 
-        .letter.current::after {
+        /* =========================================================
+           CURSOR
+        ========================================================= */
+
+        .letter.cursor::before {
 
             content: "";
 
             position: absolute;
 
-            top: 10%;
+            top: 12%;
 
-            bottom: 10%;
+            bottom: 12%;
 
-            left: -1px;
+            left: -2px;
 
             width: 2px;
+
+            border-radius: 2px;
 
             background:
                 var(--primary);
 
+            box-shadow:
+                0 0 8px
+                rgba(245, 185, 66, 0.6);
+
             animation:
-                blink 1s infinite;
+                cursorBlink 1s infinite;
 
         }
 
 
-        .extra {
+        .cursor-end {
 
-            color: var(--error);
+            display: inline-block;
 
-            background:
-                rgba(255, 93, 108, 0.14);
+            width: 2px;
+
+            height: 1.3em;
+
+            margin-left: 1px;
+
+            vertical-align: middle;
 
             border-radius: 2px;
 
+            background:
+                var(--primary);
+
+            box-shadow:
+                0 0 8px
+                rgba(245, 185, 66, 0.6);
+
+            animation:
+                cursorBlink 1s infinite;
+
         }
 
 
-        .typing-hint {
+        /* =========================================================
+           CARACTERES EXTRAS
+        ========================================================= */
+
+        .extra {
+
+            color:
+                var(--error);
+
+            background:
+                rgba(255, 92, 112, 0.10);
+
+            border-radius: 3px;
+
+        }
+
+
+        /* =========================================================
+           MENSAGEM INICIAL
+        ========================================================= */
+
+        .start-message {
 
             position: absolute;
 
-            right: 20px;
+            left: 50%;
 
-            bottom: 14px;
+            bottom: 8px;
 
-            color: var(--muted);
+            transform:
+                translateX(-50%);
+
+            color:
+                var(--text-dark);
+
+            font-family:
+                var(--typing-font);
 
             font-size: 0.68rem;
 
-            opacity: 0.75;
+            white-space: nowrap;
+
+            transition:
+                opacity 0.2s;
 
         }
 
 
-        /* =====================================================
-           STATUS
-        ===================================================== */
-
-        .status {
-
-            min-height: 18px;
-
-            color: var(--muted);
-
-            font-size: 0.7rem;
-
-            text-align: center;
-
-        }
-
-
-        /* =====================================================
-           INPUT INVISÍVEL
-        ===================================================== */
-
-        #input-field {
-
-            position: fixed;
-
-            left: -10000px;
-
-            width: 1px;
-
-            height: 1px;
+        .typing-area.active
+        .start-message {
 
             opacity: 0;
 
         }
 
 
-        /* =====================================================
-           BOTÕES
-        ===================================================== */
+        /* =========================================================
+           DICA
+        ========================================================= */
+
+        .typing-tip {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            margin-top: 20px;
+
+            color:
+                var(--text-dark);
+
+            font-size: 0.68rem;
+
+        }
+
+
+        .tip-key {
+
+            padding:
+                3px 7px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 5px;
+
+            background:
+                var(--surface);
+
+            color:
+                var(--text-soft);
+
+            font-family:
+                var(--typing-font);
+
+        }
+
+
+        /* =========================================================
+           CONTROLES
+        ========================================================= */
 
         .controls {
 
             display: flex;
 
+            align-items: center;
+
             justify-content: center;
 
             gap: 10px;
 
+            padding:
+                0 24px 26px;
+
         }
 
 
-        .btn {
+        .button {
 
-            padding: 10px 16px;
+            min-width: 130px;
+
+            padding:
+                11px 18px;
 
             border:
-                1px solid
-                var(--border);
+                1px solid var(--border);
 
-            border-radius: 10px;
+            border-radius:
+                var(--radius-small);
 
             background:
                 var(--surface);
 
-            color: var(--text);
+            color:
+                var(--text-soft);
+
+            font-size: 0.78rem;
 
             transition:
                 0.2s ease;
@@ -644,13 +864,16 @@
         }
 
 
-        .btn:hover {
+        .button:hover {
 
             border-color:
                 var(--primary);
 
             color:
                 var(--primary);
+
+            background:
+                var(--surface-hover);
 
             transform:
                 translateY(-1px);
@@ -658,7 +881,7 @@
         }
 
 
-        .btn.primary {
+        .button.primary {
 
             border-color:
                 var(--primary);
@@ -666,71 +889,91 @@
             background:
                 var(--primary);
 
-            color: #07120d;
+            color:
+                #171006;
 
-            font-weight: 700;
+            font-weight: 800;
 
         }
 
 
-        .btn.primary:hover {
+        .button.primary:hover {
 
             background:
-                var(--primary-dark);
+                var(--primary-light);
 
-            color: white;
+            color:
+                #171006;
 
         }
 
 
-        /* =====================================================
-           RESULTADOS
-        ===================================================== */
+        /* =========================================================
+           RESULTADO
+        ========================================================= */
 
-        .results {
+        .result {
 
             display: none;
 
             padding:
-                clamp(28px, 6vw, 50px);
+                50px 30px;
 
             text-align: center;
 
         }
 
 
-        .results.show {
+        .result.show {
 
             display: block;
 
         }
 
 
-        .results h2 {
+        .result-monkey {
 
-            margin-bottom: 8px;
+            margin-bottom: 15px;
 
-            color:
-                var(--primary);
+            font-size: 60px;
 
-            font-size: 1.8rem;
+            animation:
+                monkeyFloat 2.2s ease-in-out infinite;
 
         }
 
 
-        .results p {
+        .result h2 {
 
-            margin-bottom: 28px;
+            margin-bottom: 7px;
 
             color:
-                var(--muted);
+                var(--primary);
+
+            font-size:
+                clamp(1.5rem, 5vw, 2rem);
+
+        }
+
+
+        .result-subtitle {
+
+            margin-bottom: 30px;
+
+            color:
+                var(--text-dark);
 
             font-size: 0.8rem;
 
         }
 
 
-        .results-grid {
+        .result-grid {
+
+            width: min(650px, 100%);
+
+            margin:
+                0 auto 30px;
 
             display: grid;
 
@@ -739,23 +982,22 @@
 
             gap: 12px;
 
-            margin-bottom: 28px;
-
         }
 
 
         .result-card {
 
-            padding: 18px 10px;
+            padding:
+                20px 10px;
 
             border:
-                1px solid
-                var(--border);
+                1px solid var(--border);
 
-            border-radius: 12px;
+            border-radius:
+                var(--radius-medium);
 
             background:
-                var(--surface-2);
+                var(--surface);
 
         }
 
@@ -767,44 +1009,64 @@
             margin-bottom: 8px;
 
             color:
-                var(--muted);
+                var(--text-dark);
 
-            font-size: 0.68rem;
+            font-size: 0.65rem;
+
+            font-weight: 700;
 
             text-transform: uppercase;
+
+            letter-spacing: 0.08em;
 
         }
 
 
         .result-card strong {
 
+            color:
+                var(--text);
+
+            font-family:
+                var(--typing-font);
+
             font-size:
-                clamp(1.7rem, 5vw, 2.5rem);
+                clamp(1.5rem, 5vw, 2.2rem);
 
         }
 
 
-        /* =====================================================
-           FOOTER
-        ===================================================== */
+        /* =========================================================
+           RODAPÉ
+        ========================================================= */
 
         footer {
 
-            color:
-                var(--muted);
+            padding-top: 25px;
 
-            font-size: 0.7rem;
+            color:
+                var(--text-dark);
+
+            font-size: 0.68rem;
 
             text-align: center;
 
         }
 
 
-        /* =====================================================
-           ANIMAÇÃO
-        ===================================================== */
+        footer strong {
 
-        @keyframes blink {
+            color:
+                var(--primary);
+
+        }
+
+
+        /* =========================================================
+           ANIMAÇÕES
+        ========================================================= */
+
+        @keyframes cursorBlink {
 
             0%,
             45% {
@@ -823,26 +1085,58 @@
         }
 
 
-        /* =====================================================
-           RESPONSIVIDADE
-        ===================================================== */
+        @keyframes monkeyFloat {
 
-        @media (max-width: 620px) {
+            0%,
+            100% {
+
+                transform:
+                    translateY(0);
+
+            }
+
+            50% {
+
+                transform:
+                    translateY(-8px);
+
+            }
+
+        }
+
+
+        /* =========================================================
+           RESPONSIVIDADE
+        ========================================================= */
+
+        @media (max-width: 700px) {
 
             body {
 
                 padding:
-                    20px 12px;
-
-                gap: 20px;
+                    20px 10px;
 
             }
 
 
-            .toolbar {
+            .header {
+
+                margin-bottom: 20px;
+
+            }
+
+
+            .keyboard-hint {
+
+                display: none;
+
+            }
+
+
+            .game-top {
 
                 align-items:
-                    stretch;
+                    flex-start;
 
                 flex-direction:
                     column;
@@ -850,7 +1144,9 @@
             }
 
 
-            .toolbar-group {
+            .duration {
+
+                width: 100%;
 
                 justify-content:
                     space-between;
@@ -858,15 +1154,57 @@
             }
 
 
-            .typing-panel {
+            .typing-section {
 
-                min-height: 300px;
+                padding:
+                    15px;
 
             }
 
 
-            .stats,
-            .results-grid {
+            .typing-area {
+
+                min-height:
+                    330px;
+
+                padding:
+                    22px 7px;
+
+            }
+
+
+            .typing-text {
+
+                font-size:
+                    1.08rem;
+
+                line-height:
+                    1.9;
+
+            }
+
+
+            .typing-tip {
+
+                flex-wrap:
+                    wrap;
+
+            }
+
+
+            .result-grid {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+        }
+
+
+        @media (max-width: 420px) {
+
+            .statistics {
 
                 grid-template-columns:
                     1fr;
@@ -876,25 +1214,40 @@
 
             .stat {
 
-                border-right: 0;
+                padding:
+                    13px;
+
+                border-right:
+                    0;
 
                 border-bottom:
-                    1px solid
-                    var(--border);
+                    1px solid var(--border);
 
             }
 
 
             .stat:last-child {
 
-                border-bottom: 0;
+                border-bottom:
+                    0;
 
             }
 
 
-            .typing-hint {
+            .brand-subtitle {
 
                 display: none;
+
+            }
+
+
+            .monkey-logo {
+
+                width: 46px;
+
+                height: 46px;
+
+                font-size: 25px;
 
             }
 
@@ -908,373 +1261,425 @@
 <body>
 
 
-    <!-- =====================================================
-         CABEÇALHO
-    ====================================================== -->
-
-    <header>
-
-        <div class="brand">
-
-            <div class="brand-icon">
-                ⌨
-            </div>
-
-            <h1>
-                PortugueseType
-            </h1>
-
-        </div>
+    <div class="container">
 
 
-        <p class="subtitle">
-            Teste sua velocidade, precisão e consistência
-            de digitação em português.
-        </p>
+        <!-- =====================================================
+             CABEÇALHO
+        ====================================================== -->
 
-    </header>
+        <header class="header">
 
+            <div class="brand">
 
-
-    <!-- =====================================================
-         CONTEÚDO
-    ====================================================== -->
-
-    <main>
-
-
-        <!-- =================================================
-             CONFIGURAÇÕES
-        ================================================== -->
-
-        <section
-            class="panel toolbar"
-            aria-label="Configurações"
-        >
-
-            <div class="toolbar-group">
-
-                <span class="toolbar-label">
-                    Duração
-                </span>
-
-
-                <select
-                    id="duration-select"
-                    aria-label="Duração do teste"
+                <div
+                    class="monkey-logo"
+                    aria-hidden="true"
                 >
-
-                    <option value="15">
-                        15 segundos
-                    </option>
+                    🐒
+                </div>
 
 
-                    <option
-                        value="30"
-                        selected
-                    >
-                        30 segundos
-                    </option>
+                <div>
+
+                    <div class="brand-name">
+
+                        Macaco
+                        <span>Infinito</span>
+
+                    </div>
 
 
-                    <option value="60">
-                        60 segundos
-                    </option>
+                    <div class="brand-subtitle">
 
+                        Digite. Erre. Melhore. Repita.
 
-                    <option value="120">
-                        120 segundos
-                    </option>
+                    </div>
 
-                </select>
+                </div>
 
             </div>
 
 
-            <div class="toolbar-group">
+            <div class="keyboard-hint">
 
-                <span class="toolbar-label">
-                    Atalho
-                </span>
-
-
-                <span class="subtitle">
-                    Tab = reiniciar
-                </span>
+                <kbd>Tab</kbd>
+                &nbsp; para reiniciar
 
             </div>
 
-        </section>
+        </header>
 
 
 
-        <!-- =================================================
-             ESTATÍSTICAS
-        ================================================== -->
+        <!-- =====================================================
+             JOGO
+        ====================================================== -->
 
-        <section
-            class="panel stats"
-            id="stats-panel"
-            aria-label="Estatísticas"
+        <main
+            class="game"
+            id="game"
         >
 
 
-            <div class="stat">
+            <!-- =================================================
+                 TOPO
+            ================================================== -->
 
-                <span class="stat-label">
-                    Tempo
-                </span>
+            <div class="game-top">
 
+                <div class="mode">
 
-                <span
-                    class="stat-value"
-                    id="timer"
-                >
-                    30
-                </span>
-
-            </div>
-
-
-            <div class="stat">
-
-                <span class="stat-label">
-                    WPM
-                </span>
-
-
-                <span
-                    class="stat-value"
-                    id="wpm"
-                >
-                    0
-                </span>
-
-            </div>
-
-
-            <div class="stat">
-
-                <span class="stat-label">
-                    Precisão
-                </span>
-
-
-                <span
-                    class="stat-value"
-                    id="accuracy"
-                >
-                    100%
-                </span>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =================================================
-             PROGRESSO
-        ================================================== -->
-
-        <div
-            class="panel progress"
-            aria-hidden="true"
-        >
-
-            <div
-                class="progress-bar"
-                id="progress-bar"
-            ></div>
-
-        </div>
-
-
-
-        <!-- =================================================
-             ÁREA DE DIGITAÇÃO
-        ================================================== -->
-
-        <section
-            class="panel typing-panel"
-            id="typing-panel"
-            tabindex="0"
-            aria-label="Área de digitação"
-        >
-
-
-            <input
-                id="input-field"
-                type="text"
-                autocomplete="off"
-                autocapitalize="off"
-                spellcheck="false"
-                aria-label="Campo de digitação"
-            >
-
-
-            <div
-                class="words"
-                id="words-display"
-            ></div>
-
-
-            <span class="typing-hint">
-                Digite e pressione espaço para avançar
-            </span>
-
-        </section>
-
-
-
-        <!-- =================================================
-             STATUS
-        ================================================== -->
-
-        <p
-            class="status"
-            id="status"
-        >
-            Clique na área acima e comece a digitar.
-        </p>
-
-
-
-        <!-- =================================================
-             RESULTADOS
-        ================================================== -->
-
-        <section
-            class="panel results"
-            id="results"
-            aria-live="polite"
-        >
-
-
-            <h2>
-                Teste finalizado!
-            </h2>
-
-
-            <p>
-                Veja seu desempenho nesta rodada.
-            </p>
-
-
-            <div class="results-grid">
-
-
-                <div class="result-card">
+                    <span class="mode-dot"></span>
 
                     <span>
-                        WPM
+                        Modo cotidiano
+                    </span>
+
+                </div>
+
+
+                <div class="duration">
+
+                    <span class="duration-label">
+                        Duração
                     </span>
 
 
-                    <strong id="final-wpm">
-                        0
-                    </strong>
+                    <select
+                        id="duration"
+                        aria-label="Duração do teste"
+                    >
+
+                        <option value="15">
+                            15 segundos
+                        </option>
+
+
+                        <option
+                            value="30"
+                            selected
+                        >
+                            30 segundos
+                        </option>
+
+
+                        <option value="60">
+                            60 segundos
+                        </option>
+
+
+                        <option value="120">
+                            120 segundos
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ESTATÍSTICAS
+            ================================================== -->
+
+            <section
+                class="statistics"
+                id="statistics"
+            >
+
+
+                <div class="stat">
+
+                    <span class="stat-label">
+                        Tempo
+                    </span>
+
+
+                    <span
+                        class="stat-value highlight"
+                        id="timer"
+                    >
+                        30
+                    </span>
 
                 </div>
 
 
 
-                <div class="result-card">
+                <div class="stat">
 
-                    <span>
+                    <span class="stat-label">
+                        Velocidade
+                    </span>
+
+
+                    <span
+                        class="stat-value"
+                        id="wpm"
+                    >
+                        0
+                    </span>
+
+                </div>
+
+
+
+                <div class="stat">
+
+                    <span class="stat-label">
                         Precisão
                     </span>
 
 
-                    <strong id="final-accuracy">
-                        0%
-                    </strong>
-
-                </div>
-
-
-
-                <div class="result-card">
-
-                    <span>
-                        Caracteres corretos
+                    <span
+                        class="stat-value"
+                        id="accuracy"
+                    >
+                        100%
                     </span>
 
-
-                    <strong id="final-correct">
-                        0
-                    </strong>
-
                 </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 BARRA DE PROGRESSO
+            ================================================== -->
+
+            <div
+                class="progress-container"
+                aria-hidden="true"
+            >
+
+                <div
+                    class="progress"
+                    id="progress"
+                ></div>
 
             </div>
 
 
-            <button
-                class="btn primary"
-                id="restart-result"
+
+            <!-- =================================================
+                 DIGITAÇÃO
+            ================================================== -->
+
+            <section class="typing-section">
+
+
+                <div
+                    class="typing-area"
+                    id="typingArea"
+                    tabindex="0"
+                    role="textbox"
+                    aria-label="Área de digitação"
+                >
+
+
+                    <div
+                        class="typing-text"
+                        id="typingText"
+                    ></div>
+
+
+                    <div class="start-message">
+
+                        Comece a digitar...
+
+                    </div>
+
+                </div>
+
+
+                <div class="typing-tip">
+
+                    <span>
+                        Digite as palavras e use
+                    </span>
+
+
+                    <span class="tip-key">
+                        ESPAÇO
+                    </span>
+
+
+                    <span>
+                        para avançar
+                    </span>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 CONTROLES
+            ================================================== -->
+
+            <div
+                class="controls"
+                id="controls"
             >
-                Tentar novamente
-            </button>
 
-        </section>
+                <button
+                    class="button"
+                    id="restart"
+                >
+                    ↻ Reiniciar
+                </button>
+
+            </div>
 
 
 
-        <!-- =================================================
-             CONTROLES
-        ================================================== -->
+            <!-- =================================================
+                 RESULTADO
+            ================================================== -->
 
-        <div
-            class="controls"
-            id="controls"
-        >
-
-            <button
-                class="btn"
-                id="restart-button"
+            <section
+                class="result"
+                id="result"
             >
-                ↻ Reiniciar
-            </button>
-
-        </div>
-
-    </main>
 
 
-
-    <!-- =====================================================
-         RODAPÉ
-    ====================================================== -->
-
-    <footer>
-
-        <p>
-            Desenvolvido com HTML, CSS e JavaScript puro.
-        </p>
-
-    </footer>
+                <div class="result-monkey">
+                    🐒
+                </div>
 
 
+                <h2>
+                    Teste concluído!
+                </h2>
 
-    <!-- =====================================================
-         JAVASCRIPT
-    ====================================================== -->
+
+                <p class="result-subtitle">
+                    Veja como o macaco se saiu desta vez.
+                </p>
+
+
+                <div class="result-grid">
+
+
+                    <div class="result-card">
+
+                        <span>
+                            WPM
+                        </span>
+
+
+                        <strong id="finalWpm">
+                            0
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="result-card">
+
+                        <span>
+                            Precisão
+                        </span>
+
+
+                        <strong id="finalAccuracy">
+                            0%
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="result-card">
+
+                        <span>
+                            Caracteres corretos
+                        </span>
+
+
+                        <strong id="finalCorrect">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="button primary"
+                    id="resultRestart"
+                >
+                    🐒 Tentar novamente
+                </button>
+
+            </section>
+
+
+        </main>
+
+
+
+        <!-- =====================================================
+             STATUS
+        ====================================================== -->
+
+        <footer>
+
+            <p>
+                <strong>Macaco Infinito</strong>
+                · quanto mais você pratica, mais rápido fica.
+            </p>
+
+        </footer>
+
+    </div>
+
+
+
+    <!-- =========================================================
+         INPUT INVISÍVEL
+    ========================================================== -->
+
+    <input
+        id="input"
+        type="text"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        aria-hidden="true"
+        tabindex="-1"
+        style="
+            position: fixed;
+            left: -10000px;
+            top: -10000px;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+        "
+    >
+
+
 
     <script>
 
         "use strict";
 
 
-        /* =====================================================
-           PALAVRAS DO DIA A DIA
-        ===================================================== */
+        /* =========================================================
+           BANCO DE PALAVRAS
+        ========================================================= */
 
-        const palavrasPt = [
+        const palavras = [
 
-            /* ---------------------------------------------
-               CASA E COTIDIANO
-            --------------------------------------------- */
+            /* CASA */
 
             "casa",
             "quarto",
@@ -1294,24 +1699,16 @@
             "roupa",
             "sapato",
             "mochila",
-            "celular",
-            "telefone",
-            "computador",
-            "televisão",
-            "controle",
-            "lâmpada",
             "espelho",
             "toalha",
             "cobertor",
             "travesseiro",
             "geladeira",
             "fogão",
-            "microondas",
+            "lâmpada",
 
 
-            /* ---------------------------------------------
-               PESSOAS
-            --------------------------------------------- */
+            /* PESSOAS */
 
             "pessoa",
             "amigo",
@@ -1337,13 +1734,9 @@
             "cliente",
             "médico",
             "médica",
-            "enfermeiro",
-            "enfermeira",
 
 
-            /* ---------------------------------------------
-               TEMPO E ROTINA
-            --------------------------------------------- */
+            /* TEMPO */
 
             "dia",
             "noite",
@@ -1370,12 +1763,9 @@
             "depois",
             "antes",
             "cedo",
-            "tarde",
 
 
-            /* ---------------------------------------------
-               TRABALHO E ESTUDO
-            --------------------------------------------- */
+            /* ESTUDO E TRABALHO */
 
             "trabalho",
             "escola",
@@ -1391,14 +1781,9 @@
             "caneta",
             "lápis",
             "papel",
-            "professor",
-            "aluno",
             "reunião",
             "projeto",
             "equipe",
-            "chefe",
-            "cliente",
-            "dinheiro",
             "salário",
             "férias",
             "emprego",
@@ -1407,9 +1792,7 @@
             "horário",
 
 
-            /* ---------------------------------------------
-               COMIDA
-            --------------------------------------------- */
+            /* COMIDA */
 
             "água",
             "café",
@@ -1448,16 +1831,13 @@
             "biscoito",
             "jantar",
             "almoço",
-            "café",
             "lanche",
             "restaurante",
             "padaria",
             "mercado",
 
 
-            /* ---------------------------------------------
-               AÇÕES
-            --------------------------------------------- */
+            /* AÇÕES */
 
             "fazer",
             "dizer",
@@ -1515,9 +1895,7 @@
             "consertar",
 
 
-            /* ---------------------------------------------
-               SENTIMENTOS
-            --------------------------------------------- */
+            /* SENTIMENTOS */
 
             "amor",
             "amizade",
@@ -1545,12 +1923,9 @@
             "orgulho",
             "vergonha",
             "surpresa",
-            "preocupação",
 
 
-            /* ---------------------------------------------
-               LUGARES
-            --------------------------------------------- */
+            /* LUGARES */
 
             "mercado",
             "loja",
@@ -1568,7 +1943,6 @@
             "shopping",
             "cinema",
             "teatro",
-            "igreja",
             "academia",
             "estação",
             "aeroporto",
@@ -1576,16 +1950,10 @@
             "bairro",
             "rua",
             "avenida",
-            "casa",
-            "trabalho",
             "hotel",
-            "hotel",
-            "mercado",
 
 
-            /* ---------------------------------------------
-               TRANSPORTE
-            --------------------------------------------- */
+            /* TRANSPORTE */
 
             "ônibus",
             "carro",
@@ -1606,9 +1974,7 @@
             "passagem",
 
 
-            /* ---------------------------------------------
-               TECNOLOGIA DO DIA A DIA
-            --------------------------------------------- */
+            /* TECNOLOGIA DO DIA A DIA */
 
             "internet",
             "senha",
@@ -1630,21 +1996,15 @@
             "bateria",
             "carregador",
             "fone",
-            "fones",
-            "telefone",
             "celular",
             "computador",
             "tela",
             "teclado",
             "mouse",
             "câmera",
-            "internet",
-            "senha",
 
 
-            /* ---------------------------------------------
-               NATUREZA
-            --------------------------------------------- */
+            /* NATUREZA */
 
             "água",
             "mar",
@@ -1674,13 +2034,10 @@
             "formiga",
             "grama",
             "jardim",
-            "rio",
             "lago",
 
 
-            /* ---------------------------------------------
-               CARACTERÍSTICAS
-            --------------------------------------------- */
+            /* CARACTERÍSTICAS */
 
             "grande",
             "pequeno",
@@ -1706,9 +2063,6 @@
             "pouco",
             "sempre",
             "nunca",
-            "agora",
-            "depois",
-            "antes",
             "perto",
             "longe",
             "alto",
@@ -1719,27 +2073,19 @@
             "triste",
             "quente",
             "frio",
-            "novo",
-            "antigo",
             "simples",
             "importante",
             "especial",
             "normal",
             "diferente",
             "igual",
-            "melhor",
-            "pior",
 
 
-            /* ---------------------------------------------
-               PALAVRAS EXTRAS DO COTIDIANO
-            --------------------------------------------- */
+            /* PALAVRAS GERAIS */
 
             "vida",
             "mundo",
             "coisa",
-            "pessoa",
-            "lugar",
             "momento",
             "forma",
             "jeito",
@@ -1752,10 +2098,8 @@
             "nome",
             "número",
             "pergunta",
-            "resposta",
             "história",
             "palavra",
-            "verdade",
             "motivo",
             "exemplo",
             "situação",
@@ -1774,56 +2118,24 @@
             "presente",
 
 
-            /* ---------------------------------------------
-               PALAVRA EXTREMAMENTE LONGA
-               
-               😈 DESAFIO ESPECIAL
-            --------------------------------------------- */
+            /* =================================================
+               PALAVRA ESPECIAL
+            ================================================= */
 
             "pneumoultramicroscopicossilicovulcanoconiótico"
 
         ];
 
 
-        /* =====================================================
-           REFERÊNCIAS HTML
-        ===================================================== */
+        /* =========================================================
+           ELEMENTOS
+        ========================================================= */
 
-        const refs = {
+        const elements = {
 
             duration:
                 document.getElementById(
-                    "duration-select"
-                ),
-
-            input:
-                document.getElementById(
-                    "input-field"
-                ),
-
-            words:
-                document.getElementById(
-                    "words-display"
-                ),
-
-            panel:
-                document.getElementById(
-                    "typing-panel"
-                ),
-
-            stats:
-                document.getElementById(
-                    "stats-panel"
-                ),
-
-            controls:
-                document.getElementById(
-                    "controls"
-                ),
-
-            results:
-                document.getElementById(
-                    "results"
+                    "duration"
                 ),
 
             timer:
@@ -1843,45 +2155,70 @@
 
             progress:
                 document.getElementById(
-                    "progress-bar"
+                    "progress"
                 ),
 
-            status:
+            typingArea:
                 document.getElementById(
-                    "status"
+                    "typingArea"
                 ),
 
-            finalWpm:
+            typingText:
                 document.getElementById(
-                    "final-wpm"
+                    "typingText"
                 ),
 
-            finalAccuracy:
+            input:
                 document.getElementById(
-                    "final-accuracy"
-                ),
-
-            finalCorrect:
-                document.getElementById(
-                    "final-correct"
+                    "input"
                 ),
 
             restart:
                 document.getElementById(
-                    "restart-button"
+                    "restart"
                 ),
 
-            restartResult:
+            controls:
                 document.getElementById(
-                    "restart-result"
+                    "controls"
+                ),
+
+            statistics:
+                document.getElementById(
+                    "statistics"
+                ),
+
+            result:
+                document.getElementById(
+                    "result"
+                ),
+
+            finalWpm:
+                document.getElementById(
+                    "finalWpm"
+                ),
+
+            finalAccuracy:
+                document.getElementById(
+                    "finalAccuracy"
+                ),
+
+            finalCorrect:
+                document.getElementById(
+                    "finalCorrect"
+                ),
+
+            resultRestart:
+                document.getElementById(
+                    "resultRestart"
                 )
 
         };
 
 
-        /* =====================================================
-           ESTADO DO JOGO
-        ===================================================== */
+        /* =========================================================
+           ESTADO
+        ========================================================= */
 
         const state = {
 
@@ -1889,74 +2226,80 @@
 
             remaining: 30,
 
-            timerId: null,
+            timer: null,
 
             started: false,
 
             finished: false,
 
-            currentIndex: 0,
-
-            currentTyped: "",
-
             words: [],
+
+            currentWord: 0,
+
+            typed: "",
 
             completed: []
 
         };
 
 
-        /* =====================================================
+        /* =========================================================
            PALAVRA ALEATÓRIA
-        ===================================================== */
+        ========================================================= */
 
-        function randomWord() {
+        function getRandomWord() {
 
             const index =
                 Math.floor(
                     Math.random() *
-                    palavrasPt.length
+                    palavras.length
                 );
 
-            return palavrasPt[index];
+            return palavras[index];
 
         }
 
 
-        /* =====================================================
-           GERAR PALAVRAS
-        ===================================================== */
+        /* =========================================================
+           GERAR TEXTO
+        ========================================================= */
 
         function generateWords(
-            amount = 70
+            amount = 80
         ) {
 
-            state.words =
-                Array.from(
-                    {
-                        length: amount
-                    },
-                    randomWord
+            state.words = [];
+
+            for (
+                let i = 0;
+                i < amount;
+                i++
+            ) {
+
+                state.words.push(
+                    getRandomWord()
                 );
 
-            renderWords();
+            }
+
+            renderText();
 
         }
 
 
-        /* =====================================================
-           RENDERIZAR PALAVRAS
-        ===================================================== */
+        /* =========================================================
+           RENDERIZAR TEXTO
+        ========================================================= */
 
-        function renderWords() {
+        function renderText() {
 
-            refs.words.innerHTML = "";
+            elements.typingText.innerHTML = "";
 
 
             state.words.forEach(
                 (
                     word,
-                    wordIndex
+                    index
                 ) => {
 
                     const wordElement =
@@ -1970,8 +2313,8 @@
 
 
                     if (
-                        wordIndex ===
-                        state.currentIndex
+                        index ===
+                        state.currentWord
                     ) {
 
                         wordElement.classList.add(
@@ -1981,64 +2324,100 @@
                     }
 
 
-                    /*
-                     * Cria cada letra
-                     * individualmente.
-                     */
-
                     [
                         ...word
                     ].forEach(
-                        (letter) => {
+                        (character) => {
 
-                            const letterElement =
+                            const letter =
                                 document.createElement(
                                     "span"
                                 );
 
 
-                            letterElement.className =
+                            letter.className =
                                 "letter";
 
 
-                            letterElement.textContent =
-                                letter;
+                            letter.textContent =
+                                character;
 
 
                             wordElement.appendChild(
-                                letterElement
+                                letter
                             );
 
                         }
                     );
 
 
-                    refs.words.appendChild(
+                    elements.typingText.appendChild(
                         wordElement
+                    );
+
+
+                    /*
+                     * Espaço entre palavras.
+                     */
+
+                    if (
+                        index <
+                        state.words.length - 1
+                    ) {
+
+                        elements.typingText.appendChild(
+                            document.createTextNode(
+                                " "
+                            )
+                        );
+
+                    }
+
+                }
+            );
+
+
+            updateTypingVisual();
+
+        }
+
+
+        /* =========================================================
+           VISUAL DA PALAVRA ATUAL
+        ========================================================= */
+
+        function updateTypingVisual() {
+
+            const words =
+                elements.typingText
+                    .querySelectorAll(
+                        ".word"
+                    );
+
+
+            words.forEach(
+                (
+                    word,
+                    index
+                ) => {
+
+                    word.classList.toggle(
+                        "current",
+                        index ===
+                        state.currentWord
                     );
 
                 }
             );
 
 
-            updateCurrentWordVisual();
-
-        }
-
-
-        /* =====================================================
-           ATUALIZAR PALAVRA ATUAL
-        ===================================================== */
-
-        function updateCurrentWordVisual() {
-
-            const wordElement =
-                refs.words.querySelector(
-                    ".word.current"
-                );
+            const current =
+                words[
+                    state.currentWord
+                ];
 
 
-            if (!wordElement) {
+            if (!current) {
 
                 return;
 
@@ -2046,21 +2425,13 @@
 
 
             const letters =
-                [
-                    ...wordElement.querySelectorAll(
-                        ".letter"
-                    )
-                ];
-
-
-            const typed =
-                [
-                    ...state.currentTyped
-                ];
+                current.querySelectorAll(
+                    ".letter"
+                );
 
 
             /*
-             * Limpa classes antigas.
+             * Remove estado anterior.
              */
 
             letters.forEach(
@@ -2069,7 +2440,7 @@
                     letter.classList.remove(
                         "correct",
                         "incorrect",
-                        "current"
+                        "cursor"
                     );
 
                 }
@@ -2077,7 +2448,38 @@
 
 
             /*
-             * Analisa cada letra digitada.
+             * Remove caracteres extras.
+             */
+
+            current
+                .querySelectorAll(
+                    ".extra"
+                )
+                .forEach(
+                    (extra) => {
+
+                        extra.remove();
+
+                    }
+                );
+
+
+            const typed =
+                [
+                    ...state.typed
+                ];
+
+
+            const target =
+                [
+                    ...state.words[
+                        state.currentWord
+                    ]
+                ];
+
+
+            /*
+             * Compara caracteres.
              */
 
             typed.forEach(
@@ -2088,13 +2490,12 @@
 
                     if (
                         index <
-                        letters.length
+                        target.length
                     ) {
 
                         if (
                             character ===
-                            letters[index]
-                                .textContent
+                            target[index]
                         ) {
 
                             letters[index]
@@ -2118,36 +2519,16 @@
 
 
             /*
-             * Remove caracteres extras.
-             */
-
-            wordElement
-                .querySelectorAll(
-                    ".extra"
-                )
-                .forEach(
-                    (element) => {
-
-                        element.remove();
-
-                    }
-                );
-
-
-            /*
-             * Mostra caracteres
-             * digitados além da palavra.
+             * Caracteres extras.
              */
 
             if (
                 typed.length >
-                letters.length
+                target.length
             ) {
 
                 typed
-                    .slice(
-                        letters.length
-                    )
+                    .slice(target.length)
                     .forEach(
                         (character) => {
 
@@ -2165,7 +2546,7 @@
                                 character;
 
 
-                            wordElement.appendChild(
+                            current.appendChild(
                                 extra
                             );
 
@@ -2176,7 +2557,7 @@
 
 
             /*
-             * Posiciona o cursor.
+             * Cursor.
              */
 
             if (
@@ -2187,7 +2568,62 @@
                 letters[
                     typed.length
                 ].classList.add(
-                    "current"
+                    "cursor"
+                );
+
+            } else {
+
+                /*
+                 * Cursor no final da palavra.
+                 */
+
+                const cursor =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                cursor.className =
+                    "cursor-end";
+
+
+                current.appendChild(
+                    cursor
+                );
+
+            }
+
+
+            /*
+             * Mantém a palavra atual
+             * visível quando necessário.
+             */
+
+            current.scrollIntoView({
+                block: "nearest",
+                inline: "nearest"
+            });
+
+        }
+
+
+        /* =========================================================
+           FOCO
+        ========================================================= */
+
+        function focusTyping() {
+
+            if (
+                !state.finished
+            ) {
+
+                elements.input.focus({
+                    preventScroll: true
+                });
+
+
+                elements.typingArea.classList.add(
+                    "active"
                 );
 
             }
@@ -2195,30 +2631,24 @@
         }
 
 
-        /* =====================================================
-           FOCO
-        ===================================================== */
+        /* =========================================================
+           REMOVER FOCO VISUAL
+        ========================================================= */
 
-        function focusInput() {
+        function blurTyping() {
 
-            if (
-                !state.finished
-            ) {
-
-                refs.input.focus({
-                    preventScroll: true
-                });
-
-            }
+            elements.typingArea.classList.remove(
+                "active"
+            );
 
         }
 
 
-        /* =====================================================
+        /* =========================================================
            CALCULAR ESTATÍSTICAS
-        ===================================================== */
+        ========================================================= */
 
-        function calculateCurrentStats() {
+        function calculateStats() {
 
             let correct = 0;
 
@@ -2226,22 +2656,20 @@
 
 
             /*
-             * Palavras concluídas.
+             * Palavras finalizadas.
              */
 
-            for (
-                const result
-                of state.completed
-            ) {
+            state.completed.forEach(
+                (result) => {
 
-                correct +=
-                    result.correct;
+                    correct +=
+                        result.correct;
 
+                    incorrect +=
+                        result.incorrect;
 
-                incorrect +=
-                    result.incorrect;
-
-            }
+                }
+            );
 
 
             /*
@@ -2250,17 +2678,17 @@
 
             const target =
                 state.words[
-                    state.currentIndex
+                    state.currentWord
                 ] || "";
 
 
             const typed =
                 [
-                    ...state.currentTyped
+                    ...state.typed
                 ];
 
 
-            const targetLetters =
+            const targetCharacters =
                 [
                     ...target
                 ];
@@ -2274,9 +2702,9 @@
 
                     if (
                         index <
-                        targetLetters.length &&
+                        targetCharacters.length &&
                         character ===
-                        targetLetters[index]
+                        targetCharacters[index]
                     ) {
 
                         correct++;
@@ -2295,14 +2723,14 @@
              * Tempo utilizado.
              */
 
-            const elapsedSeconds =
+            const elapsed =
                 state.duration -
                 state.remaining;
 
 
             const minutes =
                 Math.max(
-                    elapsedSeconds / 60,
+                    elapsed / 60,
                     1 / 60
                 );
 
@@ -2310,27 +2738,17 @@
             /*
              * WPM.
              *
-             * Padrão:
-             *
-             * caracteres corretos / 5
-             * dividido pelo tempo em minutos.
+             * 5 caracteres = 1 palavra.
              */
 
             const wpm =
-                Math.max(
-                    0,
-                    Math.round(
-                        (
-                            correct / 5
-                        ) /
-                        minutes
-                    )
+                Math.round(
+                    (
+                        correct / 5
+                    ) /
+                    minutes
                 );
 
-
-            /*
-             * Precisão.
-             */
 
             const total =
                 correct +
@@ -2354,7 +2772,11 @@
 
                 incorrect,
 
-                wpm,
+                wpm:
+                    Math.max(
+                        0,
+                        wpm
+                    ),
 
                 accuracy
 
@@ -2363,47 +2785,41 @@
         }
 
 
-        /* =====================================================
+        /* =========================================================
            ATUALIZAR ESTATÍSTICAS
-        ===================================================== */
+        ========================================================= */
 
         function updateStats() {
 
             const stats =
-                calculateCurrentStats();
+                calculateStats();
 
 
-            refs.wpm.textContent =
+            elements.wpm.textContent =
                 stats.wpm;
 
 
-            refs.accuracy.textContent =
+            elements.accuracy.textContent =
                 `${stats.accuracy}%`;
 
-
-            /*
-             * Barra de progresso.
-             */
 
             const progress =
                 state.remaining /
                 state.duration;
 
 
-            refs.progress.style.transform =
-                `scaleX(${
-                    Math.max(
-                        0,
-                        progress
-                    )
-                })`;
+            elements.progress.style.transform =
+                `scaleX(${Math.max(
+                    0,
+                    progress
+                )})`;
 
         }
 
 
-        /* =====================================================
-           INICIAR JOGO
-        ===================================================== */
+        /* =========================================================
+           INICIAR
+        ========================================================= */
 
         function startGame() {
 
@@ -2420,23 +2836,17 @@
             state.started = true;
 
 
-            refs.panel.classList.add(
-                "running"
-            );
+            focusTyping();
 
 
-            refs.status.textContent =
-                "Valendo! Continue digitando...";
-
-
-            state.timerId =
+            state.timer =
                 setInterval(
                     () => {
 
                         state.remaining--;
 
 
-                        refs.timer.textContent =
+                        elements.timer.textContent =
                             state.remaining;
 
 
@@ -2458,35 +2868,48 @@
         }
 
 
-        /* =====================================================
+        /* =========================================================
            FINALIZAR PALAVRA
-        ===================================================== */
+        ========================================================= */
 
-        function finalizeCurrentWord() {
+        function finishWord() {
 
             const target =
                 state.words[
-                    state.currentIndex
+                    state.currentWord
                 ];
 
 
             if (
-                !target ||
-                state.currentTyped.length === 0
+                !target
             ) {
 
-                return false;
+                return;
+
+            }
+
+
+            /*
+             * Não permite avançar
+             * com uma palavra vazia.
+             */
+
+            if (
+                state.typed.length === 0
+            ) {
+
+                return;
 
             }
 
 
             const typed =
                 [
-                    ...state.currentTyped
+                    ...state.typed
                 ];
 
 
-            const targetLetters =
+            const targetCharacters =
                 [
                     ...target
                 ];
@@ -2497,10 +2920,6 @@
             let incorrect = 0;
 
 
-            /*
-             * Verifica caracteres.
-             */
-
             typed.forEach(
                 (
                     character,
@@ -2509,9 +2928,9 @@
 
                     if (
                         index <
-                        targetLetters.length &&
+                        targetCharacters.length &&
                         character ===
-                        targetLetters[index]
+                        targetCharacters[index]
                     ) {
 
                         correct++;
@@ -2527,24 +2946,20 @@
 
 
             /*
-             * Caracteres que faltaram.
+             * Caracteres que não foram digitados.
              */
 
             if (
                 typed.length <
-                targetLetters.length
+                targetCharacters.length
             ) {
 
                 incorrect +=
-                    targetLetters.length -
+                    targetCharacters.length -
                     typed.length;
 
             }
 
-
-            /*
-             * Salva resultado.
-             */
 
             state.completed.push({
 
@@ -2555,54 +2970,50 @@
             });
 
 
-            /*
-             * Próxima palavra.
-             */
+            state.currentWord++;
 
-            state.currentIndex++;
-
-            state.currentTyped = "";
+            state.typed = "";
 
 
             /*
-             * Adiciona novas palavras
-             * quando necessário.
+             * Mantém palavras disponíveis.
              */
 
             if (
-                state.currentIndex >=
-                state.words.length - 15
+                state.currentWord >
+                state.words.length - 20
             ) {
 
-                state.words.push(
-                    ...Array.from(
-                        {
-                            length: 40
-                        },
-                        randomWord
-                    )
-                );
+                for (
+                    let i = 0;
+                    i < 50;
+                    i++
+                ) {
+
+                    state.words.push(
+                        getRandomWord()
+                    );
+
+                }
 
             }
 
 
-            renderWords();
+            elements.input.value =
+                "";
 
 
-            refs.input.value = "";
+            renderText();
 
 
             updateStats();
 
-
-            return true;
-
         }
 
 
-        /* =====================================================
-           INPUT
-        ===================================================== */
+        /* =========================================================
+           DIGITAÇÃO
+        ========================================================= */
 
         function handleInput() {
 
@@ -2615,11 +3026,6 @@
             }
 
 
-            /*
-             * Primeiro caractere
-             * inicia o cronômetro.
-             */
-
             if (
                 !state.started
             ) {
@@ -2630,18 +3036,21 @@
 
 
             /*
-             * Espaços são tratados
-             * pelo evento de teclado.
+             * Remove espaços.
+             *
+             * O espaço é tratado separadamente
+             * pelo evento keydown.
              */
 
-            state.currentTyped =
-                refs.input.value.replace(
-                    /\s/g,
-                    ""
-                );
+            state.typed =
+                elements.input.value
+                    .replace(
+                        /\s/g,
+                        ""
+                    );
 
 
-            updateCurrentWordVisual();
+            updateTypingVisual();
 
 
             updateStats();
@@ -2649,9 +3058,9 @@
         }
 
 
-        /* =====================================================
+        /* =========================================================
            TECLADO
-        ===================================================== */
+        ========================================================= */
 
         function handleKeydown(
             event
@@ -2679,13 +3088,12 @@
              */
 
             if (
-                event.key === " " ||
                 event.code === "Space"
             ) {
 
                 event.preventDefault();
 
-                finalizeCurrentWord();
+                finishWord();
 
                 return;
 
@@ -2702,16 +3110,16 @@
 
                 event.preventDefault();
 
-                finalizeCurrentWord();
+                finishWord();
 
             }
 
         }
 
 
-        /* =====================================================
-           FINALIZAR JOGO
-        ===================================================== */
+        /* =========================================================
+           FINALIZAR TESTE
+        ========================================================= */
 
         function finishGame() {
 
@@ -2724,106 +3132,93 @@
             }
 
 
-            /*
-             * Para cronômetro.
-             */
-
             clearInterval(
-                state.timerId
+                state.timer
             );
 
 
-            state.timerId = null;
-
+            state.timer = null;
 
             state.finished = true;
-
 
             state.started = false;
 
 
             /*
-             * Resultado final.
+             * Estatísticas finais.
              */
 
             const stats =
-                calculateCurrentStats();
+                calculateStats();
 
 
-            refs.finalWpm.textContent =
+            elements.finalWpm.textContent =
                 stats.wpm;
 
 
-            refs.finalAccuracy.textContent =
+            elements.finalAccuracy.textContent =
                 `${stats.accuracy}%`;
 
 
-            refs.finalCorrect.textContent =
+            elements.finalCorrect.textContent =
                 stats.correct;
 
 
             /*
-             * Esconde elementos.
+             * Interface.
              */
 
-            refs.stats.style.display =
+            elements.statistics.style.display =
                 "none";
 
 
-            refs.panel.classList.remove(
-                "running"
-            );
-
-
-            refs.panel.classList.add(
-                "finished"
-            );
-
-
-            refs.controls.style.display =
+            document
+                .querySelector(
+                    ".progress-container"
+                )
+                .style.display =
                 "none";
 
 
-            /*
-             * Mostra resultados.
-             */
+            document
+                .querySelector(
+                    ".typing-section"
+                )
+                .style.display =
+                "none";
 
-            refs.results.classList.add(
+
+            elements.controls.style.display =
+                "none";
+
+
+            elements.result.classList.add(
                 "show"
             );
 
 
-            refs.input.blur();
+            blurTyping();
 
 
-            refs.status.textContent =
-                "Teste encerrado. Veja seus resultados abaixo.";
+            elements.input.blur();
 
         }
 
 
-        /* =====================================================
-           REINICIAR
-        ===================================================== */
+        /* =========================================================
+           RESET
+        ========================================================= */
 
         function resetGame() {
 
-            /*
-             * Cancela cronômetro anterior.
-             */
-
             clearInterval(
-                state.timerId
+                state.timer
             );
 
 
-            /*
-             * Obtém duração.
-             */
-
             state.duration =
                 Number(
-                    refs.duration.value
+                    elements.duration.value
                 );
 
 
@@ -2831,7 +3226,7 @@
                 state.duration;
 
 
-            state.timerId =
+            state.timer =
                 null;
 
 
@@ -2843,11 +3238,15 @@
                 false;
 
 
-            state.currentIndex =
+            state.words =
+                [];
+
+
+            state.currentWord =
                 0;
 
 
-            state.currentTyped =
+            state.typed =
                 "";
 
 
@@ -2856,126 +3255,171 @@
 
 
             /*
-             * Atualiza estatísticas.
+             * Estatísticas.
              */
 
-            refs.timer.textContent =
+            elements.timer.textContent =
                 state.duration;
 
 
-            refs.wpm.textContent =
+            elements.wpm.textContent =
                 "0";
 
 
-            refs.accuracy.textContent =
+            elements.accuracy.textContent =
                 "100%";
 
 
-            refs.progress.style.transform =
+            elements.progress.style.transform =
                 "scaleX(1)";
 
 
             /*
-             * Restaura interface.
+             * Mostrar interface.
              */
 
-            refs.stats.style.display =
+            elements.statistics.style.display =
                 "grid";
 
 
-            refs.panel.classList.remove(
-                "finished",
-                "running"
-            );
+            document
+                .querySelector(
+                    ".progress-container"
+                )
+                .style.display =
+                "block";
 
 
-            refs.controls.style.display =
+            document
+                .querySelector(
+                    ".typing-section"
+                )
+                .style.display =
+                "block";
+
+
+            elements.controls.style.display =
                 "flex";
 
 
-            refs.results.classList.remove(
+            elements.result.classList.remove(
                 "show"
             );
 
 
-            refs.status.textContent =
-                "Clique na área acima e comece a digitar.";
+            elements.input.value =
+                "";
 
 
-            /*
-             * Gera palavras.
-             */
+            blurTyping();
+
 
             generateWords();
 
 
-            refs.input.value =
-                "";
-
-
-            focusInput();
+            /*
+             * Não focamos automaticamente
+             * para não abrir o teclado no celular
+             * imediatamente.
+             */
 
         }
 
 
-        /* =====================================================
+        /* =========================================================
            EVENTOS
-        ===================================================== */
+        ========================================================= */
 
-        refs.input.addEventListener(
+        elements.input.addEventListener(
             "input",
             handleInput
         );
 
 
-        refs.input.addEventListener(
+        elements.input.addEventListener(
             "keydown",
             handleKeydown
         );
 
 
-        /*
-         * Clique na área de digitação.
-         */
-
-        refs.panel.addEventListener(
+        elements.typingArea.addEventListener(
             "click",
-            focusInput
+            focusTyping
         );
 
 
-        /*
-         * Reiniciar.
-         */
-
-        refs.restart.addEventListener(
-            "click",
-            resetGame
+        elements.typingArea.addEventListener(
+            "focus",
+            focusTyping
         );
 
 
-        /*
-         * Reiniciar pela tela final.
-         */
+        elements.typingArea.addEventListener(
+            "blur",
+            blurTyping
+        );
 
-        refs.restartResult.addEventListener(
+
+        elements.restart.addEventListener(
             "click",
             resetGame
         );
 
 
-        /*
-         * Alterar duração.
-         */
+        elements.resultRestart.addEventListener(
+            "click",
+            resetGame
+        );
 
-        refs.duration.addEventListener(
+
+        elements.duration.addEventListener(
             "change",
             resetGame
         );
 
 
         /*
-         * TAB em qualquer lugar.
+         * Permite clicar em praticamente
+         * qualquer lugar da página para
+         * voltar ao campo de digitação.
+         */
+
+        document.addEventListener(
+            "click",
+            (event) => {
+
+                if (
+                    state.finished
+                ) {
+
+                    return;
+
+                }
+
+
+                const target =
+                    event.target;
+
+
+                if (
+                    target.closest(
+                        "button, select"
+                    )
+                ) {
+
+                    return;
+
+                }
+
+
+                focusTyping();
+
+            }
+        );
+
+
+        /*
+         * TAB funciona em qualquer lugar.
          */
 
         document.addEventListener(
@@ -2996,18 +3440,11 @@
         );
 
 
-        /* =====================================================
+        /* =========================================================
            INICIALIZAÇÃO
-        ===================================================== */
+        ========================================================= */
 
-        window.addEventListener(
-            "load",
-            () => {
-
-                resetGame();
-
-            }
-        );
+        resetGame();
 
     </script>
 
