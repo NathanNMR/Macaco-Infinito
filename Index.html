@@ -1163,7 +1163,9 @@
       spellcheck="false"
       aria-hidden="true"
       tabindex="-1"
-      style="position: fixed; left: -10000px; top: -10000px; width: 1px; height: 1px; opacity: 0"
+      inputmode="text"
+      enterkeyhint="next"
+      style="position: fixed; left: 50%; bottom: 0; width: 2px; height: 2px; opacity: 0; z-index: -1"
     />
 
     <script>
@@ -2039,16 +2041,31 @@
         }
 
         /*
-         * Remove espaços.
+         * MOBILE:
+         * Teclados virtuais nem sempre disparam keydown para ESPAÇO.
+         * Por isso, também detectamos o espaço pelo evento input.
          *
-         * O espaço é tratado separadamente
-         * pelo evento keydown.
+         * Ex.: "casa " -> finaliza a palavra mesmo sem keydown.
          */
+        const value = elements.input.value;
 
-        state.typed = elements.input.value.replace(/\s/g, "");
+        if (/\s$/.test(value)) {
+          state.typed = value.replace(/\s+$/, "").replace(/\s/g, "");
+
+          updateTypingVisual();
+          updateStats();
+
+          finishWord();
+          return;
+        }
+
+        /*
+         * O espaço não faz parte do texto digitado.
+         * Ele serve apenas para avançar para a próxima palavra.
+         */
+        state.typed = value.replace(/\s/g, "");
 
         updateTypingVisual();
-
         updateStats();
       }
 
