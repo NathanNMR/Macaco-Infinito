@@ -1,76 +1,121 @@
 # 🐒 Macaco Infinito
 
-Teste de velocidade e precisão de digitação em português, no estilo
-[Monkeytype](https://monkeytype.com/). 100% front-end, sem back-end,
-sem cadastro e sem dependências externas — é um único arquivo `index.html`.
+Um teste de **velocidade e precisão de digitação em português**, inspirado no [teorema do macaco infinito](https://pt.wikipedia.org/wiki/Teorema_do_macaco_infinito).
 
-## Demo
+O projeto é 100% front-end, feito com **HTML, CSS e JavaScript puro**, sem cadastro, back-end, framework ou processo de build.
 
-Abra `index.html` no navegador ou publique com o GitHub Pages (veja abaixo).
+## ✨ Funcionalidades
 
-## Funcionalidades
+- Testes de **15, 30, 60 ou 120 segundos**
+- Cálculo de **WPM (palavras por minuto)**
+- Medição de **precisão**
+- Feedback visual caractere por caractere
+- Cursor animado na palavra atual
+- Tela de resultado ao final do teste
+- Reinício rápido com botão ou tecla `Tab`
+- Uso de `Espaço` ou `Enter` para avançar
+- Banco com **mais de 600 palavras em português**
+- Layout responsivo para desktop, tablet e celular
+- Suporte melhorado a teclados virtuais Android e iOS
+- Sem dependências externas
 
-- Banco com mais de 370 palavras comuns em português (casa, trabalho,
-  comida, sentimentos, tecnologia, natureza etc.), incluindo uma palavra
-  "especial" como easter egg.
-- Duração configurável: 15, 30, 60 ou 120 segundos.
-- Estatísticas em tempo real: **WPM** (palavras por minuto), **precisão**
-  e tempo restante.
-- Feedback visual letra a letra (correta, incorreta, cursor animado).
-- Tela de resultado ao final do teste.
-- Atalhos de teclado: `Espaço`/`Enter` para confirmar a palavra, `Tab`
-  para reiniciar a qualquer momento.
-- Totalmente responsivo (desktop e mobile).
+## 📱 Correções para mobile
 
-## Como rodar localmente
+A versão anterior podia apresentar saltos de tela, perda de foco e comportamento irregular ao abrir o teclado virtual.
 
-Não é necessário nenhum build ou instalação — é HTML/CSS/JS puro:
+As principais causas eram:
+
+- uso de `scrollIntoView()` durante a digitação, que podia rolar a página inteira;
+- input invisível com `position: fixed` e `z-index: -1`;
+- viewport móvel sem tratamento específico para teclado virtual;
+- layout de estatísticas excessivamente vertical em telas pequenas.
+
+A versão atual:
+
+- mantém a rolagem somente dentro da área de palavras;
+- usa uma área de entrada integrada ao painel de digitação;
+- reage ao redimensionamento de `visualViewport` quando disponível;
+- usa `100dvh` e `safe-area-inset-bottom` para melhor adaptação a celulares;
+- mantém as estatísticas compactas em telas pequenas;
+- evita que o teclado virtual desloque o conteúdo de maneira inesperada.
+
+## 🚀 Como executar
+
+Clone o repositório:
 
 ```bash
 git clone https://github.com/NathanNMR/Macaco-Infinito.git
 cd Macaco-Infinito
 ```
 
-Depois é só abrir o `index.html` no navegador, ou servir a pasta com
-qualquer servidor estático, por exemplo:
+Depois, abra o arquivo `index.html` diretamente no navegador.
+
+Também é possível iniciar um servidor local:
 
 ```bash
-python3 -m http.server 8000
-# acesse http://localhost:8000
+python -m http.server 8000
 ```
 
-## Publicando no GitHub Pages
+E acessar:
 
-1. Vá em **Settings → Pages** no repositório.
-2. Em "Branch", selecione `main` e a pasta `/ (root)`.
-3. Salve — o site ficará disponível em
-   `https://nathannmr.github.io/Macaco-Infinito/`.
-
-> O arquivo precisa se chamar `index.html` (minúsculo) para o GitHub
-> Pages reconhecê-lo automaticamente como página inicial.
-
-## Estrutura do projeto
-
+```text
+http://localhost:8000
 ```
+
+## 🌐 GitHub Pages
+
+Como o arquivo principal agora se chama corretamente `index.html`, o projeto pode ser publicado diretamente pelo GitHub Pages.
+
+1. Abra **Settings → Pages**
+2. Em **Build and deployment**, escolha **Deploy from a branch**
+3. Selecione a branch `main`
+4. Selecione a pasta `/ (root)`
+5. Salve
+
+Após a publicação, o endereço esperado é:
+
+```text
+https://nathannmr.github.io/Macaco-Infinito/
+```
+
+## 🗂️ Estrutura
+
+```text
 Macaco-Infinito/
-├── index.html   # HTML, CSS e JS do jogo (arquivo único)
+├── index.html
 ├── LICENSE
 └── README.md
 ```
 
-## Tecnologias
+O projeto permanece propositalmente simples: toda a interface, estilos e lógica ficam em um único arquivo.
 
-- HTML5, CSS3 e JavaScript puro (vanilla) — sem frameworks ou build tools.
+## 🛠️ Tecnologias
 
-## Contribuindo
+- HTML5
+- CSS3
+- JavaScript (Vanilla)
+- Web APIs: `visualViewport`, eventos de teclado e input
 
-Sugestões e PRs são bem-vindos! Ideias para próximos passos:
+## 🧠 Sobre o nome
 
-- Modo com frases/citações, além de palavras soltas.
-- Histórico local de resultados (localStorage) e gráfico de evolução.
-- Tema claro.
-- Suporte a outros idiomas.
+O **teorema do macaco infinito** afirma, de forma simplificada, que um macaco pressionando teclas aleatoriamente por tempo infinito acabaria produzindo qualquer texto possível.
 
-## Licença
+Aqui a ideia é o oposto do acaso: praticar repetidamente até digitar cada vez mais rápido e com mais precisão.
 
-Distribuído sob a licença MIT. Veja [LICENSE](LICENSE) para mais detalhes.
+## 💡 Próximas ideias
+
+- histórico de resultados com `localStorage`
+- gráfico de evolução
+- modo com frases
+- dificuldade por tamanho das palavras
+- temas claro/escuro
+- ranking local
+- suporte a outros idiomas
+
+## 📄 Licença
+
+Distribuído sob a licença MIT. Consulte [LICENSE](LICENSE).
+
+---
+
+Feito por [NathanNMR](https://github.com/NathanNMR).
